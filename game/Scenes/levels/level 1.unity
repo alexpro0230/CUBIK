@@ -3124,7 +3124,7 @@ DistanceJoint2D:
   m_GameObject: {fileID: 629278169}
   m_Enabled: 0
   serializedVersion: 4
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -74819,11 +74819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711211442375, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.1
+      value: -41.899998
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711211442375, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.009998
+      value: 17.409998
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711415626365, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: orthographic size
@@ -74835,11 +74835,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711415626366, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.1
+      value: -41.899998
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711415626366, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.009998
+      value: 17.409998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
@@ -75377,11 +75377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7521645071913660922, guid: 09a294651a1ce194999f4227f1330f83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.4
+      value: -35.2
       objectReference: {fileID: 0}
     - target: {fileID: 7521645071913660922, guid: 09a294651a1ce194999f4227f1330f83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.1
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 7521645071913660922, guid: 09a294651a1ce194999f4227f1330f83, type: 3}
       propertyPath: m_LocalPosition.z

@@ -14,15 +14,21 @@ public class movement : MonoBehaviour
     [Header("-//time manitpulation:")]
     //Slow mo scale
     public float slowMoValue;
-    public float currentTimeScale;
+    [HideInInspector]public float currentTimeScale;
     [HideInInspector] public float slowMoTimeLeft;
+    
+    //Amount of maximum time in slowmo mode
     public int slowMoTime;
+    
     //Delay between slowmo finshes and the slow mo timer starts to slowly recover
     public float slowMoRecoverDelay;
+    
     //Counter to check how much of the delay has already past
     private float slowMoRecoveredDelay;
+    
     //Boolean to check if we can start recovering the slowmo delay
     private bool canRecoverSlowMoDelay;
+    
     private bool isInSlowMo; //Self explanatory
 
     [Header("Jump system")]
@@ -34,11 +40,21 @@ public class movement : MonoBehaviour
     private float JumpBufferCount;
     private float hangCounter;
 
-
     [Header("-//ground detection:")]
+
+    //The check sphere transform
     public Transform checkObj;
-    public LayerMask groundCheckMask;
-    public float checkSphereRadius;
+
+    //What is ground and whats not
+    public LayerMask groundCheckMask; 
+    
+    public float checkSphereRadius; //Self exp
+    
+    //This is a varible to check if player was grounded the previous frame, and in this way know the exact moment when landed
+    private bool WasGouned;
+
+    //Variable to know if player is currently landed
+    private bool grounded;
 
     [Header("-//components:")]
     public Rigidbody2D rb;
@@ -48,36 +64,42 @@ public class movement : MonoBehaviour
 
 
     [Header("shooting system")]
-    public int bullets;
-    public bool canShoot;
+    public int bullets; //Self exp
+    public bool canShoot; //Self exp
 
     [Header("-//scripts:")]
+    //Reference to menu management script
     public gameMenuScript gameMenuScript;
+
+    //Another sctipt for collison in lava
     public lavaScript lavaScript;
 
     [Header("-//health system:")]
-    public float health;
+    public float health; //SelfExp
 
     [Header("-//other things:")]
-    public Texture2D cursor;
-    public GameObject lavaCollEffect;
-    public GameObject storeGo;
-    public GameObject pressFtext;
-    public GameObject weaponManagerGo;
+    public Texture2D cursor; //The cursors texture
+    public GameObject lavaCollEffect; //Effect for collision with lava
+    public GameObject storeGo; //self exp
+    public GameObject pressFtext; //"
+    public GameObject weaponManagerGo; //"
+    
     //Varibble to stop you from shooting when hovering over pause button
     [HideInInspector] public bool buttonHover;
  
     //other private or not serializable variables
-
-    private bool WasGouned;
     private bool InteractProcces;
     private bool storeInteraction;
-    private bool grounded;
 
-    //grappling gun system
+    [Header("Grappling Gun system")]
+    //The joint that does the grappling hook simulation
     private DistanceJoint2D joint;
-    RaycastHit2D ray;
-    [HideInInspector] public bool isGrappling;
+    
+    [HideInInspector] public bool isGrappling; //Self exp
+
+    [Header("Jetpack system")]
+    public bool hasJetpack; //Self exp
+    private bool jetPacking; //Currently flying in jetpack
     #endregion
 
     #region startThings
@@ -210,6 +232,8 @@ public class movement : MonoBehaviour
         }
 
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
+
+        if (jetPacking) Jetpack();
     }
 
     void captureInteractProcess()
@@ -276,35 +300,49 @@ public class movement : MonoBehaviour
 
     void takeJumpInput()
     {
-        if(grounded)
+        if (!hasJetpack)
         {
-            hangCounter = hangTime;
+            if (grounded)
+            {
+                hangCounter = hangTime;
+            }
+            else
+            {
+                hangCounter -= Time.deltaTime;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                JumpBufferCount = JumpBufferLength;
+            }
+            else
+            {
+                JumpBufferCount -= Time.deltaTime;
+            }
+
+            if (JumpBufferCount >= 0 && hangCounter > 0)
+            {
+                jump();
+                JumpBufferCount = 0;
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .5f);
+            }
         }
         else
         {
-            hangCounter -= Time.deltaTime;
-        }
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                jetPacking = true;
+            }
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            JumpBufferCount = JumpBufferLength;
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                jetPacking = false;
+            }
         }
-        else
-        {
-            JumpBufferCount -= Time.deltaTime;
-        }
-
-        if (JumpBufferCount >= 0 && hangCounter > 0)
-        {
-            jump();
-            JumpBufferCount = 0;
-        }
-
-        if(Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .5f);
-        }
-
     }
     
     void jump()
@@ -485,6 +523,15 @@ public class movement : MonoBehaviour
             GetComponent<LineRenderer>().SetPosition(0, transform.position);
             GetComponent<LineRenderer>().SetPosition(1, GetComponent<DistanceJoint2D>().connectedAnchor);
         }
+    }
+
+    #endregion
+
+    #region jetpack system
+    
+    private void Jetpack()
+    {
+        rb.AddForce((Vector2.up * 500) * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     #endregion
