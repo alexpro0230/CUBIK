@@ -20,24 +20,27 @@ public class positionGrapplinHookIndicator : MonoBehaviour
         {
             if(coll.gameObject.tag == "grappable")
             {
+                LineRenderer lr = GetComponent<LineRenderer>();
                 found = true;
-                if (!coll.gameObject.GetComponent<Collider2D>().bounds.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+                GetComponent<SpriteRenderer>().enabled = true;
+                //lr.positionCount = 2;
+                //lr.SetPosition(0, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                //lr.SetPosition(1, Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), coll.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).point);
+                gameObject.transform.position =
+                    Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), (coll.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition))).point;
+                if (coll.bounds.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
                 {
-                    GetComponent<SpriteRenderer>().enabled = true;
-                    //GetComponent<LineRenderer>().positionCount = 2;
-                    //GetComponent<LineRenderer>().SetPosition(0, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                    //GetComponent<LineRenderer>().SetPosition(1, Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), coll.transform.position).point);
-                    gameObject.transform.position =
-                        Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), coll.transform.position).point;
-                }
-                else
-                {
-                    GetComponent<SpriteRenderer>().enabled = false;
+                    Debug.Log("lol");
+                    found = false;
                 }
             }
         }
 
         if (!found) GetComponent<SpriteRenderer>().enabled = false;
+        if (!found) GetComponent<LineRenderer>().positionCount = 0;
         
     }
 }
+
+
+//
