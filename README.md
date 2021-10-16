@@ -8,3 +8,7 @@ You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
 - [Twitter](https://twitter.com/studios_rubber)
 - [YouTube](https://www.youtube.com/channel/UC4gAYcj0pSyj4QMLi7pSy7w)
 - [Itch.io](https://rubber-duck-studios.itch.io/)
+
+# RELEASE DATE
+
+The release date is hard to predict, the game is in pretty early development, and lots of things to be added, but stay tunned to our social medias where we might announce the release date!
