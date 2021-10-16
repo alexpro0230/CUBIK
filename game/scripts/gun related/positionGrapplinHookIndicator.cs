@@ -23,16 +23,8 @@ public class positionGrapplinHookIndicator : MonoBehaviour
                 LineRenderer lr = GetComponent<LineRenderer>();
                 found = true;
                 GetComponent<SpriteRenderer>().enabled = true;
-                //lr.positionCount = 2;
-                //lr.SetPosition(0, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                //lr.SetPosition(1, Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), coll.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).point);
                 gameObject.transform.position =
                     Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), (coll.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition))).point;
-                if (coll.bounds.Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
-                {
-                    Debug.Log("lol");
-                    found = false;
-                }
             }
         }
 

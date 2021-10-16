@@ -452,11 +452,12 @@ public class movement : MonoBehaviour
     void grapplingGunCalculation()
     {
 
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if(Input.GetKeyDown(KeyCode.Mouse1) && GameObject.Find("grappling hook pointer").GetComponent<SpriteRenderer>().enabled)
         {
             isGrappling = true;
             joint = GetComponent<DistanceJoint2D>();
-            joint.connectedAnchor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //joint.connectedAnchor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            joint.connectedAnchor = GameObject.Find("grappling hook pointer").transform.position;
             GetComponent<LineRenderer>().positionCount = 2;
             GetComponent<LineRenderer>().SetPosition(0, transform.position);
             GetComponent<LineRenderer>().SetPosition(1, GetComponent<DistanceJoint2D>().connectedAnchor);
