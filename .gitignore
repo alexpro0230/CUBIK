@@ -63,6 +63,7 @@ crashlytics-build.properties
 
 /AstarPathfindingProject/
 /CodeMonkey/
-/EZ Camera Shake/
+/EZ*Camera*Shake/
 /Plugins/
-/TextMesh Pro/
+/TextMesh*Pro/
+/built*in*shaders/
