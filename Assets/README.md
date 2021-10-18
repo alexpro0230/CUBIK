@@ -1,0 +1,1 @@
+- The source code and other assets are in the "game" folder.
