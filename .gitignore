@@ -59,3 +59,10 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+#Other folders and direcotries
+
+/AstarPathfindingProject/
+/CodeMonkey/
+/EZ Camera Shake/
+/Plugins/
+/TextMesh Pro/
