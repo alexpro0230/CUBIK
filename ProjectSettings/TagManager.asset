@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - ground
+  - bullet
+  - win trigger
+  - player
+  - cinemachineShake
+  - heal p-up
+  - deleteOnEnter
+  - speed p-up
+  - enemy
+  - TriggerEnemyAttack
+  - grenade
+  - storeManager
+  - money manager
+  - OnMouseOverSound
+  - store
+  - store trigger
+  - F to interact TEXT
+  - weapon manager
+  - weaponManager
+  - grappable
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - background
+  - Water
+  - UI
+  - ground
+  - lava
+  - obj
+  - player
+  - cinemachineShake
+  - heal p-up
+  - jumplable
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: background
+    uniqueID: 328663437
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
