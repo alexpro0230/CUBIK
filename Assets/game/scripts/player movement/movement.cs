@@ -101,6 +101,8 @@ public class movement : MonoBehaviour
     public bool hasJetpack; //Self exp
     private bool jetPacking; //Currently flying in jetpack
     public int jetpackMultiplier; //variable to control the force that is applied when jetpacking
+    private GameObject jetpackGO; //Variable for the jetpack gameobject
+
     #endregion
 
     #region startThings
@@ -130,6 +132,7 @@ public class movement : MonoBehaviour
         
         health = 100;
         startSettings();
+        initializeJetpack();
     }
 
     void startSettings()
@@ -227,14 +230,15 @@ public class movement : MonoBehaviour
 
         if(!WasGouned && grounded)
         {
-            Debug.Log("player touched ground at: " + transform.position);
             GameObject LandPartEffect = GameObjHodler._i.landParticeEffect;
-            Instantiate(LandPartEffect, checkObj.position - new Vector3(0.3f, 0.3f, 0.3f), Quaternion.Euler(90, 0 , 0));
+            GameObject instanciatied = Instantiate(LandPartEffect, checkObj.position - new Vector3(0.3f, 0.3f, 0.3f), Quaternion.Euler(90, 0 , 0));
+            Destroy(instanciatied, 1f);
         }
 
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
 
         if (jetPacking) Jetpack();
+        if (!jetPacking) jetpackGO.GetComponent<ParticleSystem>().Stop();
     }
 
     void captureInteractProcess()
@@ -533,6 +537,13 @@ public class movement : MonoBehaviour
     private void Jetpack()
     {
         rb.AddForce((Vector2.up * jetpackMultiplier) * Time.deltaTime, ForceMode2D.Impulse);
+        jetpackGO.GetComponent<ParticleSystem>().Play();
+    }
+
+    private void initializeJetpack()
+    {
+        jetpackGO = Instantiate(GameObjHodler._i.jetpackVFX, transform.position + new Vector3(0, -0.25f, 0), Quaternion.Euler(90, 0, 0), transform);
+        jetpackGO.GetComponent<ParticleSystem>().Pause();
     }
 
     #endregion

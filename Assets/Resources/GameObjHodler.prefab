@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landParticeEffect: {fileID: 2037748481469301755, guid: b7f8abc8d278f4d40b3e3484d72f729c, type: 3}
+  jetpackVFX: {fileID: 1299822377367627528, guid: 37277607f37595e44bdf631d760a485e, type: 3}

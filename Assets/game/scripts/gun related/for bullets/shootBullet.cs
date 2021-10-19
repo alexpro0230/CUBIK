@@ -85,5 +85,12 @@ public class shootBullet : MonoBehaviour
             isfierying = false;
             Destroy(_flame);
         }
+
+    }
+
+    //When the weapon manager switeches to this gameobject it will call this script
+    public void swtichedToWeapon()
+    {
+        isfierying = false;
     }
 }

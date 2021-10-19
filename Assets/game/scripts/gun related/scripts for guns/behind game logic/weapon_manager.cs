@@ -94,17 +94,22 @@ public class weapon_manager : MonoBehaviour
         int i = 0;
         foreach(Transform obj in transform)
         {
-            if(i == selectedWeapon)
+            if (i == selectedWeapon)
             {
                 if (obj.transform.tag == "grenade" && obj.gameObject.GetComponent<grenadeScript>().grenadeAmount <= 0)
                     obj.gameObject.SetActive(false);
                 obj.gameObject.SetActive(true);
+                try
+                {
+                    obj.GetComponent<shootBullet>().swtichedToWeapon();
+                } catch
+                { }
             }
             else
             {
-                if(obj.transform.tag == "grenade")
+                if (obj.transform.tag == "grenade")
                 {
-                    if(switchedToGreanade != null) switchedToGreanade(this, EventArgs.Empty);
+                    if (switchedToGreanade != null) switchedToGreanade(this, EventArgs.Empty);
                 }
 
                 obj.gameObject.SetActive(false);
