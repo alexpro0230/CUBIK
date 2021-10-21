@@ -109,17 +109,24 @@ public class movement : MonoBehaviour
 
     private void Start()
     {
+        //I'm to lazy to reference a new variable, so i'm gonna use another bars parent to find the slow mo one
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().maxValue = slowMoTime;
         slowMoTimeLeft = slowMoTime;
+       
         pressFtext = GameObject.FindWithTag("F to interact TEXT");
         if(pressFtext != null) pressFtext.SetActive(false);
+        
+        //I have no idea why i've done it this way before, but it does the job and im lazy of redoing it
         foreach(Transform tr in transform)
         {
             if (tr.tag == "weapon manager")
                 weaponManagerGo = tr.gameObject;
         }
+        
         storeGo = GameObject.FindWithTag("store");
         if(storeGo != null) storeGo.SetActive(false);
+        
+        //Find out if store object exists
         try
         {
             print("active in heirarchy: " + storeGo.activeInHierarchy);
@@ -137,16 +144,24 @@ public class movement : MonoBehaviour
 
     void startSettings()
     {
-        weaponManagerGo = gameObject.transform.Find("weapon manager").gameObject;
         canShoot = true;
+        
         ChromaticAberration cb;
         volume.profile.TryGet<ChromaticAberration>(out cb);
         cb.intensity.value = 0;
+        
         musicdef.Play();
+        
         grounded = true;
+        
+        //Time settings
         Time.fixedDeltaTime = 0.0007f;
         Time.timeScale = 1;
+        
+        //Thing for the store
         InteractProcces = false;
+        
+        //Set how cursor looks
         setCursor();
     }
 
@@ -161,27 +176,34 @@ public class movement : MonoBehaviour
     
     void Update()
     {
+        //Refresh health bar value
         refreshHealth();
-
+        
+        //Check if landed
         groundCheck();
 
         currentTimeScale = Time.timeScale;
-
+        
+        //Take all kind of input
         takeInput();
-
+        
+        //Die if health under 0
         checkHealth();
 
         //if(InteractProcces) captureInteractProcess();
-
+        
+        //Other important calculations
         doUpdateThings();
 
         WasGouned = grounded;
-
+        
+        //Calulations for grappling gun
         grapplingGunCalculation();
     }
 
     private void FixedUpdate()
     {
+        //The if is really important, because without it no movement for the player when grappling would be done
         if (!isGrappling)
         {
             float x = Input.GetAxisRaw("Horizontal") * movementSpeed;
@@ -191,50 +213,57 @@ public class movement : MonoBehaviour
 
     void doUpdateThings()
     {
+        //slow mo calculations: 
+        
         slowMoTimeLeft = Mathf.Clamp(slowMoTimeLeft, 0, slowMoTime);
-
+        
+        //If allowed to recover the delay, do so
         if(canRecoverSlowMoDelay)
         {
             slowMoRecoveredDelay -= Time.unscaledDeltaTime;
         }
-
+        
+        //If we are in slow mo, substract from the slow mo counter
         if(isInSlowMo)
         {
             slowMoTimeLeft -= Time.unscaledDeltaTime;
         }
 
+        //If the delay we already recovered the need delay to recover
         if(slowMoRecoveredDelay < 0)
         {
             slowMoTimeLeft += Time.unscaledDeltaTime * 2;
         }
-
+        
+        //If we are in slow mo but slow mo time runs out, stop slow mo
         if(Time.timeScale != 1 && slowMoTimeLeft <= 0)
         {
             slowMo();
         }
-
+        
+        //when all menus closed, it originated after some bugs, and it was the first hard scripted way that came to my mind
         if(gameMenuScript.menu.activeSelf == false && gameMenuScript.deathMenu.activeSelf == false && gameMenuScript.settingsMenu.activeSelf == false && gameMenuScript.winMenu.activeSelf == false && !buttonHover)
         {
             weaponManagerGo.GetComponent<weapon_manager>().canSwitch = true;
             shootBullet shootBullet;
+            
+            //Get current weapon's shoot bullet script
             weaponManagerGo.transform.GetChild(weaponManagerGo.GetComponent<weapon_manager>().selectedWeapon).TryGetComponent<shootBullet>(out shootBullet);
-            try
-            {
+            
+            //Some weapons dont have shoot bullet script, like graenade, that's why we gotta check if it's not null
+            if(shootBullet != null)
                 shootBullet.canShoot = true;
-            }
-            catch
-            {
-                
-            }
         }
-
+        
+        //If player laned this frame
         if(!WasGouned && grounded)
         {
+            //Instantiate landing effect
             GameObject LandPartEffect = GameObjHodler._i.landParticeEffect;
             GameObject instanciatied = Instantiate(LandPartEffect, checkObj.position - new Vector3(0.3f, 0.3f, 0.3f), Quaternion.Euler(90, 0 , 0));
             Destroy(instanciatied, 1f);
         }
-
+        
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
 
         if (jetPacking) Jetpack();
@@ -452,8 +481,10 @@ public class movement : MonoBehaviour
 
     public void slowMo()
     {
+        //global volume components for slow mo effects
         ChromaticAberration cb;
         LensDistortion ld;
+        
         if (Time.timeScale == 1)
         {
             volume.profile.TryGet<ChromaticAberration>(out cb);
