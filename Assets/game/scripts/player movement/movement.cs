@@ -216,45 +216,54 @@ public class movement : MonoBehaviour
         //slow mo calculations: 
         
         slowMoTimeLeft = Mathf.Clamp(slowMoTimeLeft, 0, slowMoTime);
-
+        
+        //If allowed to recover the delay, do so
         if(canRecoverSlowMoDelay)
         {
             slowMoRecoveredDelay -= Time.unscaledDeltaTime;
         }
-
+        
+        //If we are in slow mo, substract from the slow mo counter
         if(isInSlowMo)
         {
             slowMoTimeLeft -= Time.unscaledDeltaTime;
         }
 
+        //If the delay we already recovered the need delay to recover
         if(slowMoRecoveredDelay < 0)
         {
             slowMoTimeLeft += Time.unscaledDeltaTime * 2;
         }
-
+        
+        //If we are in slow mo but slow mo time runs out, stop slow mo
         if(Time.timeScale != 1 && slowMoTimeLeft <= 0)
         {
             slowMo();
         }
         
-        //when all menus closed
+        //when all menus closed, it originated after some bugs, and it was the first hard scripted way that came to my mind
         if(gameMenuScript.menu.activeSelf == false && gameMenuScript.deathMenu.activeSelf == false && gameMenuScript.settingsMenu.activeSelf == false && gameMenuScript.winMenu.activeSelf == false && !buttonHover)
         {
             weaponManagerGo.GetComponent<weapon_manager>().canSwitch = true;
             shootBullet shootBullet;
+            
+            //Get current weapon's shoot bullet script
             weaponManagerGo.transform.GetChild(weaponManagerGo.GetComponent<weapon_manager>().selectedWeapon).TryGetComponent<shootBullet>(out shootBullet);
             
+            //Some weapons dont have shoot bullet script, like graenade, that's why we gotta check if it's not null
             if(shootBullet != null)
                 shootBullet.canShoot = true;
         }
-
+        
+        //If player laned this frame
         if(!WasGouned && grounded)
         {
+            //Instantiate landing effect
             GameObject LandPartEffect = GameObjHodler._i.landParticeEffect;
             GameObject instanciatied = Instantiate(LandPartEffect, checkObj.position - new Vector3(0.3f, 0.3f, 0.3f), Quaternion.Euler(90, 0 , 0));
             Destroy(instanciatied, 1f);
         }
-
+        
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
 
         if (jetPacking) Jetpack();
@@ -472,8 +481,10 @@ public class movement : MonoBehaviour
 
     public void slowMo()
     {
+        //global volume components for slow mo effects
         ChromaticAberration cb;
         LensDistortion ld;
+        
         if (Time.timeScale == 1)
         {
             volume.profile.TryGet<ChromaticAberration>(out cb);
