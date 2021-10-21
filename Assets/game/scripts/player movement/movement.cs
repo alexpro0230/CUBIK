@@ -543,7 +543,7 @@ public class movement : MonoBehaviour
     private void initializeJetpack()
     {
         jetpackGO = Instantiate(GameObjHodler._i.jetpackVFX, transform.position + new Vector3(0, -0.25f, 0), Quaternion.Euler(90, 0, 0), transform);
-        jetpackGO.GetComponent<ParticleSystem>().Pause();
+        jetpackGO.GetComponent<ParticleSystem>().Stop();
     }
 
     #endregion

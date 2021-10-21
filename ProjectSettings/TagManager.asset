@@ -24,6 +24,7 @@ TagManager:
   - weapon manager
   - weaponManager
   - grappable
+  - jetpack
   layers:
   - Default
   - TransparentFX
