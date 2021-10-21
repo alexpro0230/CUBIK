@@ -266,8 +266,11 @@ public class movement : MonoBehaviour
         
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
 
-        if (jetPacking) Jetpack();
-        if (!jetPacking) jetpackGO.GetComponent<ParticleSystem>().Stop();
+        if (jetPacking)
+            Jetpack();
+        
+        if (!jetPacking) 
+            jetpackGO.GetComponent<ParticleSystem>().Stop();
     }
 
     void captureInteractProcess()
@@ -425,27 +428,39 @@ public class movement : MonoBehaviour
         {
             LavaCollision();
         }
-        else if(collision.gameObject.tag == "win trigger")
+
+        switch (collision.gameObject.tag)
         {
-            gameMenuScript.win();
-        }
-        else if(collision.gameObject.tag == "speed p-up")
-        {
-            speedPowerUp(collision);
-        }
-        else if(collision.gameObject.tag == "deleteOnEnter")
-        {
-            fadeText(collision);
-        }
-        else if(collision.gameObject.tag == "TriggerEnemyAttack")
-        {
-            triggerEnemyAttackSingle triggerEnemyAttackSingle = collision.gameObject.GetComponent<triggerEnemyAttackSingle>();
-            triggerEnemyAttackSingle.startEnemyAttack();
-        }
-        else if(collision.gameObject.tag == "store trigger")
-        {
-            InteractProcces = true;
-            storeInteraction = true;
+            case "win trigger":
+                gameMenuScript.win();
+                break;
+
+            case "speed p-up":
+                speedPowerUp(collision);
+                break;
+
+            case "deleteOnEnter":
+                fadeText(collision);
+                break;
+
+            case "TriggerEnemyAttack":
+                triggerEnemyAttackSingle triggerEnemyAttackSingle = collision.gameObject.GetComponent<triggerEnemyAttackSingle>();
+                triggerEnemyAttackSingle.startEnemyAttack();
+                break;
+
+            case "store trigger":
+                InteractProcces = true;
+                storeInteraction = true;
+                break;
+
+            case "jetpack":
+                hasJetpack = true;
+                Destroy(collision.gameObject);
+                break;
+
+            default:
+                Debug.Log("collision with object without tag dettected, collision variable: " + collision);
+                break;
         }
     }
     
@@ -567,8 +582,10 @@ public class movement : MonoBehaviour
     
     private void Jetpack()
     {
+        if(!jetpackGO.GetComponent<ParticleSystem>().isPlaying)
+            jetpackGO.GetComponent<ParticleSystem>().Play();
+
         rb.AddForce((Vector2.up * jetpackMultiplier) * Time.deltaTime, ForceMode2D.Impulse);
-        jetpackGO.GetComponent<ParticleSystem>().Play();
     }
 
     private void initializeJetpack()

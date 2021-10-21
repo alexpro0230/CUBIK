@@ -101,6 +101,12 @@ public class gameMenuScript : MonoBehaviour
         gunSfxVolume.value = PlayerPrefs.GetFloat("Gun SFX volume");
     }
 
+
+
+    #endregion
+
+    #region update
+
     // Update is called once per frame
     void Update()
     {
@@ -129,6 +135,9 @@ public class gameMenuScript : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+            restartLevel();
     }
 
     #endregion
@@ -288,6 +297,7 @@ public class gameMenuScript : MonoBehaviour
     #endregion
 
     #region level loading sys
+
     public void restartLevel()
     {
         canOpenMenu = true;
