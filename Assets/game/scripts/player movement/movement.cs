@@ -109,17 +109,24 @@ public class movement : MonoBehaviour
 
     private void Start()
     {
+        //I'm to lazy to reference a new variable, so i'm gonna use another bars parent to find the slow mo one
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().maxValue = slowMoTime;
         slowMoTimeLeft = slowMoTime;
+       
         pressFtext = GameObject.FindWithTag("F to interact TEXT");
         if(pressFtext != null) pressFtext.SetActive(false);
+        
+        //I have no idea why i've done it this way before, but it does the job and im lazy of redoing it
         foreach(Transform tr in transform)
         {
             if (tr.tag == "weapon manager")
                 weaponManagerGo = tr.gameObject;
         }
+        
         storeGo = GameObject.FindWithTag("store");
         if(storeGo != null) storeGo.SetActive(false);
+        
+        //Find out if store object exists
         try
         {
             print("active in heirarchy: " + storeGo.activeInHierarchy);
@@ -137,16 +144,24 @@ public class movement : MonoBehaviour
 
     void startSettings()
     {
-        weaponManagerGo = gameObject.transform.Find("weapon manager").gameObject;
         canShoot = true;
+        
         ChromaticAberration cb;
         volume.profile.TryGet<ChromaticAberration>(out cb);
         cb.intensity.value = 0;
+        
         musicdef.Play();
+        
         grounded = true;
+        
+        //Time settings
         Time.fixedDeltaTime = 0.0007f;
         Time.timeScale = 1;
+        
+        //Thing for the store
         InteractProcces = false;
+        
+        //Set how cursor looks
         setCursor();
     }
 
@@ -176,16 +191,19 @@ public class movement : MonoBehaviour
         checkHealth();
 
         //if(InteractProcces) captureInteractProcess();
-
+        
+        //Other important calculations
         doUpdateThings();
 
         WasGouned = grounded;
-
+        
+        //Calulations for grappling gun
         grapplingGunCalculation();
     }
 
     private void FixedUpdate()
     {
+        //The if is really important, because without it no movement for the player when grappling would be done
         if (!isGrappling)
         {
             float x = Input.GetAxisRaw("Horizontal") * movementSpeed;
@@ -195,6 +213,8 @@ public class movement : MonoBehaviour
 
     void doUpdateThings()
     {
+        //slow mo calculations: 
+        
         slowMoTimeLeft = Mathf.Clamp(slowMoTimeLeft, 0, slowMoTime);
 
         if(canRecoverSlowMoDelay)
@@ -216,20 +236,16 @@ public class movement : MonoBehaviour
         {
             slowMo();
         }
-
+        
+        //when all menus closed
         if(gameMenuScript.menu.activeSelf == false && gameMenuScript.deathMenu.activeSelf == false && gameMenuScript.settingsMenu.activeSelf == false && gameMenuScript.winMenu.activeSelf == false && !buttonHover)
         {
             weaponManagerGo.GetComponent<weapon_manager>().canSwitch = true;
             shootBullet shootBullet;
             weaponManagerGo.transform.GetChild(weaponManagerGo.GetComponent<weapon_manager>().selectedWeapon).TryGetComponent<shootBullet>(out shootBullet);
-            try
-            {
+            
+            if(shootBullet != null)
                 shootBullet.canShoot = true;
-            }
-            catch
-            {
-                
-            }
         }
 
         if(!WasGouned && grounded)
