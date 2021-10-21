@@ -161,14 +161,18 @@ public class movement : MonoBehaviour
     
     void Update()
     {
+        //Refresh health bar value
         refreshHealth();
-
+        
+        //Check if landed
         groundCheck();
 
         currentTimeScale = Time.timeScale;
-
+        
+        //Take all kind of input
         takeInput();
-
+        
+        //Die if health under 0
         checkHealth();
 
         //if(InteractProcces) captureInteractProcess();
