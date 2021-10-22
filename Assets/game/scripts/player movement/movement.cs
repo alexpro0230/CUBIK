@@ -588,6 +588,7 @@ public class movement : MonoBehaviour
         rb.AddForce((Vector2.up * jetpackMultiplier) * Time.deltaTime, ForceMode2D.Impulse);
     }
 
+    //Creates jetpack at the begging of the game
     private void initializeJetpack()
     {
         jetpackGO = Instantiate(GameObjHodler._i.jetpackVFX, transform.position + new Vector3(0, -0.25f, 0), Quaternion.Euler(90, 0, 0), transform);
