@@ -40,13 +40,13 @@ public class bulletScript : MonoBehaviour
             Destroy(expsfx, 1f);
             Destroy(gameObject);
             shakeCamera();
-            //CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, 1);
             Destroy(bulletEffectExplosion, 2);
             
             if(collision.gameObject.tag == "enemy")
             {
                 enemyScript enemyScript = collision.gameObject.GetComponent<enemyScript>();
                 enemyScript.health -= damage;
+                damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString(), 3);
             }
             else if(collision.gameObject.tag == "grenade")
             {

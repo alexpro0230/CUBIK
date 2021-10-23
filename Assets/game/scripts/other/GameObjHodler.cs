@@ -20,5 +20,6 @@ public class GameObjHodler : MonoBehaviour
 
     public GameObject landParticeEffect;
     public GameObject jetpackVFX;
+    public GameObject damagePopUp;
 }
  
