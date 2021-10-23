@@ -743,13 +743,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f23581e5d22548448a2c05573aa1eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockMovement: 0
+  lockShooting: 0
+  lockMusicPlay: 0
   movementSpeed: 12
   slowMoValue: 0.2
   currentTimeScale: 0
   slowMoTimeLeft: 0
   slowMoTime: 5
   slowMoRecoverDelay: 2
-  jumpForce: 12
+  jumpForce: 20
   hangTime: 0.1
   JumpBufferLength: 0.07
   checkObj: {fileID: 238098383109679830}

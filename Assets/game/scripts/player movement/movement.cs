@@ -104,14 +104,11 @@ public class movement : MonoBehaviour
     private bool jetPacking; //Currently flying in jetpack
     public int jetpackMultiplier; //variable to control the force that is applied when jetpacking
     private GameObject jetpackGO; //Variable for the jetpack gameobject
-    
     //maxmum time that you can fly using jetpack
     public int jetPackTime;
-
     [HideInInspector]
-
     //countdow for how much time there's left for jetpack
-    public float jetPackTimeLeft; 
+    public float jetPackTimeLeft;
 
     #endregion
 
@@ -215,7 +212,7 @@ public class movement : MonoBehaviour
     private void FixedUpdate()
     {
         //The if is really important, because without it no movement for the player when grappling would be done
-        if (!isGrappling & !lockMovement)
+        if (!isGrappling && !lockMovement)
         {
             float x = Input.GetAxisRaw("Horizontal") * movementSpeed;
             rb.velocity = new Vector2(x, rb.velocity.y);
@@ -225,11 +222,10 @@ public class movement : MonoBehaviour
     void doUpdateThings()
     {
         //slow mo calculations: 
-        
         slowMoTimeLeft = Mathf.Clamp(slowMoTimeLeft, 0, slowMoTime);
-        
+
         //If allowed to recover the delay, do so
-        if(canRecoverSlowMoDelay)
+        if (canRecoverSlowMoDelay)
         {
             slowMoRecoveredDelay -= Time.unscaledDeltaTime;
         }
@@ -353,7 +349,7 @@ public class movement : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .5f);
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .30f);
             }
         }
         else
