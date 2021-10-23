@@ -69602,6 +69602,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 960501372, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 960501372, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1325853424, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -69750,11 +69758,11 @@ PrefabInstance:
       propertyPath: weapon_Manager
       value: 
       objectReference: {fileID: 8899438406499926599}
-    - target: {fileID: 6924323216382850939, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
+    - target: {fileID: 2039935541975657577, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6924323216382850939, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
+    - target: {fileID: 2039935541975657577, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -101836,6 +101844,10 @@ PrefabInstance:
       propertyPath: lavaScript
       value: 
       objectReference: {fileID: 6259204799594725952}
+    - target: {fileID: 4951534630165149416, guid: 55a59d99e6743e44f82de4d94cd954fd, type: 3}
+      propertyPath: jetPackTime
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4951534630165149416, guid: 55a59d99e6743e44f82de4d94cd954fd, type: 3}
       propertyPath: gameMenuScript
       value: 

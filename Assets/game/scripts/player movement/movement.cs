@@ -103,6 +103,14 @@ public class movement : MonoBehaviour
     private bool jetPacking; //Currently flying in jetpack
     public int jetpackMultiplier; //variable to control the force that is applied when jetpacking
     private GameObject jetpackGO; //Variable for the jetpack gameobject
+    
+    //maxmum time that you can fly using jetpack
+    public int jetPackTime;
+
+    [HideInInspector]
+
+    //countdow for how much time there's left for jetpack
+    public float jetPackTimeLeft; 
 
     #endregion
 
@@ -112,17 +120,15 @@ public class movement : MonoBehaviour
     {
         //I'm to lazy to reference a new variable, so i'm gonna use another bars parent to find the slow mo one
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().maxValue = slowMoTime;
+        healthBar.gameObject.transform.parent.Find("jetpack counter bar").GetComponent<Slider>().maxValue = jetPackTime;
+        healthBar.gameObject.transform.parent.Find("jetpack counter bar").gameObject.SetActive(false);
+
         slowMoTimeLeft = slowMoTime;
        
         pressFtext = GameObject.FindWithTag("F to interact TEXT");
         if(pressFtext != null) pressFtext.SetActive(false);
         
-        //I have no idea why i've done it this way before, but it does the job and im lazy of redoing it
-        foreach(Transform tr in transform)
-        {
-            if (tr.tag == "weapon manager")
-                weaponManagerGo = tr.gameObject;
-        }
+        weaponManagerGo = transform.Find("weapon manager").gameObject;
         
         storeGo = GameObject.FindWithTag("store");
         if(storeGo != null) storeGo.SetActive(false);
@@ -164,6 +170,9 @@ public class movement : MonoBehaviour
         
         //Set how cursor looks
         setCursor();
+
+        //if i want to change and get a jetpack by giving it to myself thorught the game then it would start full
+        jetPackTimeLeft = jetPackTime;
     }
 
     void setCursor()
@@ -266,51 +275,13 @@ public class movement : MonoBehaviour
         }
         
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
+        healthBar.gameObject.transform.parent.Find("jetpack counter bar").GetComponent<Slider>().value = jetPackTimeLeft;
 
         if (jetPacking)
             Jetpack();
         
         if (!jetPacking) 
             jetpackGO.GetComponent<ParticleSystem>().Stop();
-    }
-
-    void captureInteractProcess()
-    {
-        if (storeGo == null) return;
-    
-        if(storeInteraction)
-        {
-            if(storeGo.activeSelf == true) 
-            {
-                pressFtext.SetActive(true);
-                pressFtext.GetComponentInChildren<TextMeshProUGUI>().text = "Press F to close";
-            }    
-            else if(storeGo.activeSelf == false) 
-            { 
-                pressFtext.SetActive(true);
-                pressFtext.GetComponentInChildren<TextMeshProUGUI>().text = "Press F to open";
-            }
-        }
-        
-        
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            if(storeInteraction)
-            {
-                if(storeGo.activeSelf == true) 
-                {
-                    storeGo.SetActive(false);
-                    pressFtext.SetActive(true);
-                    pressFtext.GetComponentInChildren<TextMeshProUGUI>().text = "Press F to close";
-                }    
-                else if(storeGo.activeSelf == false) 
-                {
-                    storeGo.SetActive(true);
-                    pressFtext.SetActive(true);
-                    pressFtext.GetComponentInChildren<TextMeshProUGUI>().text = "Press F to open";
-                }
-            }
-        }
     }
 
     void refreshHealth()
@@ -371,7 +342,9 @@ public class movement : MonoBehaviour
         }
         else
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            healthBar.gameObject.transform.parent.Find("jetpack counter bar").gameObject.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.Space) && jetPackTimeLeft > 0)
             {
                 jetPacking = true;
             }
@@ -456,6 +429,7 @@ public class movement : MonoBehaviour
 
             case "jetpack":
                 hasJetpack = true;
+                slowMoTimeLeft = slowMoTime;
                 Destroy(collision.gameObject);
                 break;
 
@@ -585,6 +559,8 @@ public class movement : MonoBehaviour
     {
         if(!jetpackGO.GetComponent<ParticleSystem>().isPlaying)
             jetpackGO.GetComponent<ParticleSystem>().Play();
+
+        jetPackTimeLeft -= Time.deltaTime;
 
         rb.AddForce((Vector2.up * jetpackMultiplier) * Time.deltaTime, ForceMode2D.Impulse);
     }

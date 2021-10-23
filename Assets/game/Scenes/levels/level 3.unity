@@ -547,6 +547,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3268489140939746564, guid: 55a59d99e6743e44f82de4d94cd954fd, type: 3}
+      propertyPath: hasWeapons.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268489140939746564, guid: 55a59d99e6743e44f82de4d94cd954fd, type: 3}
+      propertyPath: hasWeapons.Array.data[6]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4951534630165149416, guid: 55a59d99e6743e44f82de4d94cd954fd, type: 3}
       propertyPath: volume
       value: 
