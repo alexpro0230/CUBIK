@@ -3,11 +3,16 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class movement : MonoBehaviour
 {
     #region variables
+
+    [Header("locks")]
+    public bool lockMovement;
+    public bool lockShooting;
+    public bool lockMusicPlay;
 
     [Header("-//movement:")]
     public float movementSpeed;
@@ -87,10 +92,6 @@ public class movement : MonoBehaviour
     
     //Varibble to stop you from shooting when hovering over pause button
     [HideInInspector] public bool buttonHover;
- 
-    //other private or not serializable variables
-    private bool InteractProcces;
-    private bool storeInteraction;
 
     [Header("Grappling Gun system")]
     //The joint that does the grappling hook simulation
@@ -147,6 +148,8 @@ public class movement : MonoBehaviour
         health = 100;
         startSettings();
         initializeJetpack();
+        
+
     }
 
     void startSettings()
@@ -164,9 +167,6 @@ public class movement : MonoBehaviour
         //Time settings
         Time.fixedDeltaTime = 0.0007f;
         Time.timeScale = 1;
-        
-        //Thing for the store
-        InteractProcces = false;
         
         //Set how cursor looks
         setCursor();
@@ -195,7 +195,8 @@ public class movement : MonoBehaviour
         currentTimeScale = Time.timeScale;
         
         //Take all kind of input
-        takeInput();
+        if(!lockMovement)
+            takeInput();
         
         //Die if health under 0
         checkHealth();
@@ -214,7 +215,7 @@ public class movement : MonoBehaviour
     private void FixedUpdate()
     {
         //The if is really important, because without it no movement for the player when grappling would be done
-        if (!isGrappling)
+        if (!isGrappling & !lockMovement)
         {
             float x = Input.GetAxisRaw("Horizontal") * movementSpeed;
             rb.velocity = new Vector2(x, rb.velocity.y);
@@ -252,7 +253,7 @@ public class movement : MonoBehaviour
         }
         
         //when all menus closed, it originated after some bugs, and it was the first hard scripted way that came to my mind
-        if(gameMenuScript.menu.activeSelf == false && gameMenuScript.deathMenu.activeSelf == false && gameMenuScript.settingsMenu.activeSelf == false && gameMenuScript.winMenu.activeSelf == false && !buttonHover)
+        if(gameMenuScript.menu.activeSelf == false && gameMenuScript.deathMenu.activeSelf == false && gameMenuScript.settingsMenu.activeSelf == false && gameMenuScript.winMenu.activeSelf == false && !buttonHover && !lockShooting)
         {
             weaponManagerGo.GetComponent<weapon_manager>().canSwitch = true;
             shootBullet shootBullet;
@@ -264,9 +265,23 @@ public class movement : MonoBehaviour
             if(shootBullet != null)
                 shootBullet.canShoot = true;
         }
-        
+        else if(lockShooting)
+        {
+            weaponManagerGo.GetComponent<weapon_manager>().canSwitch = false;
+            shootBullet shootBullet;
+
+            //Get current weapon's shoot bullet script
+            weaponManagerGo.transform.GetChild(weaponManagerGo.GetComponent<weapon_manager>().selectedWeapon).TryGetComponent<shootBullet>(out shootBullet);
+
+            //Some weapons dont have shoot bullet script, like graenade, that's why we gotta check if it's not null
+            if (shootBullet != null)
+                shootBullet.canShoot = false;
+
+        }
+
+
         //If player laned this frame
-        if(!WasGouned && grounded)
+        if (!WasGouned && grounded)
         {
             //Instantiate landing effect
             GameObject LandPartEffect = GameObjHodler._i.landParticeEffect;
@@ -299,7 +314,8 @@ public class movement : MonoBehaviour
     
     void takeInput()
     {
-        takeJumpInput();
+        if(!lockMovement)
+            takeJumpInput();
         
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -380,21 +396,6 @@ public class movement : MonoBehaviour
     {
         findTriggerType(collision);
     }
-
-    void OnTriggerExit2D(Collider2D collision) {
-        findTriggerExitType(collision);
-    }
-    
-    void findTriggerExitType(Collider2D collsion)
-    {
-        if(collsion.transform.tag == "store trigger")
-        {
-            InteractProcces = false;
-            storeInteraction = false;
-            storeGo.SetActive(false);
-            pressFtext.SetActive(false);
-        }
-    }
     
     void findTriggerType(Collider2D collision)
     {
@@ -420,11 +421,6 @@ public class movement : MonoBehaviour
             case "TriggerEnemyAttack":
                 triggerEnemyAttackSingle triggerEnemyAttackSingle = collision.gameObject.GetComponent<triggerEnemyAttackSingle>();
                 triggerEnemyAttackSingle.startEnemyAttack();
-                break;
-
-            case "store trigger":
-                InteractProcces = true;
-                storeInteraction = true;
                 break;
 
             case "jetpack":

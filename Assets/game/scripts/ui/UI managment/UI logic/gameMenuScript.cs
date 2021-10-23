@@ -58,6 +58,10 @@ public class gameMenuScript : MonoBehaviour
             PlayerPrefs.SetFloat("music volume", -20); 
             PlayerPrefs.SetFloat("Gun SFX volume", -20);
         }
+        else
+        {
+
+        }
 
 #if UNITY_EDITOR
         PlayerPrefs.SetFloat("master volume", -10);
@@ -73,6 +77,10 @@ public class gameMenuScript : MonoBehaviour
         settingsMenu.SetActive(false);
         chooseSkinMenu.SetActive(false);
 
+        musicVolume = settingsMenu.transform.Find("SETTINGS MENU").Find("Audio").Find("music").GetComponent<Slider>();
+        gunSfxVolume = settingsMenu.transform.Find("SETTINGS MENU").Find("Audio").Find("gun sfx").GetComponent<Slider>();
+        musicVolume = settingsMenu.transform.Find("SETTINGS MENU").Find("Audio").Find("master").GetComponent<Slider>();
+
         startSkinSettings();
 
         canOpenMenu = true;
@@ -87,14 +95,11 @@ public class gameMenuScript : MonoBehaviour
 
     private void setValueForSliders()
     {
-#if UNITY_EDITOR
         mixer.SetFloat("Master", PlayerPrefs.GetFloat("master volume"));
 
         mixer.SetFloat("Music", PlayerPrefs.GetFloat("music volume"));
 
         mixer.SetFloat("Gun SFX", PlayerPrefs.GetFloat("Gun SFX volume"));
-
-#endif
 
         masterVolume.value = PlayerPrefs.GetFloat("master volume");
         musicVolume.value = PlayerPrefs.GetFloat("music volume");
@@ -143,6 +148,7 @@ public class gameMenuScript : MonoBehaviour
     #endregion
 
     #region Menu managment
+
     public void resume()
     {
         Cursor.SetCursor(cursorOnGame, Vector2.zero, CursorMode.ForceSoftware);
