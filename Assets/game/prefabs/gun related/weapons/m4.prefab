@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 2242065513732924394}
-  bulletPrefab: {fileID: 3213486222985661881, guid: da2b7b222c82fc0478d0792c6158da38, type: 3}
+  bulletPrefab: {fileID: 4102983771001666369, guid: aa3ba8dac7e5ce84a922e34214bde8cd, type: 3}
   bullletSpeed: 50
   canShoot: 1
   countDown: 0

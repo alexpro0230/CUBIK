@@ -22,7 +22,8 @@ public class bulletScript : MonoBehaviour
 
     [Header("damage")]
     public float damage;
-    
+    public float damageRandomization;
+    public AnimationCurve damageOverDistance;
 
     private void Start()
     {
@@ -44,9 +45,12 @@ public class bulletScript : MonoBehaviour
             
             if(collision.gameObject.tag == "enemy")
             {
+                float distanceBetweenPlayerAndEnemy = Vector3.Distance(GameObject.Find("player").transform.position, collision.gameObject.transform.position);
+                float baseDamageAtPointInTime = damageOverDistance.Evaluate(distanceBetweenPlayerAndEnemy);
+                damage = Random.Range(baseDamageAtPointInTime - damageRandomization, baseDamageAtPointInTime + damageRandomization);
                 enemyScript enemyScript = collision.gameObject.GetComponent<enemyScript>();
                 enemyScript.health -= damage;
-                damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString(), 3);
+                damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString("0.0"), 3);
             }
             else if(collision.gameObject.tag == "grenade")
             {
