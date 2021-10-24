@@ -48,7 +48,7 @@ public class shootBullet : MonoBehaviour
         }
 
         countDown = Mathf.Clamp(countDown, 0, recoverTime);
-        countDown -= Time.deltaTime;
+        countDown -= Time.unscaledDeltaTime;
 
         if(Input.GetKeyDown(KeyCode.Mouse0) && countDown <= 0 && canShoot && bullets > 0)
         {

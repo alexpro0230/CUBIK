@@ -5,24 +5,23 @@ using UnityEngine;
 using Pathfinding;
 public class triggerEnemyAttackSingle : MonoBehaviour
 {
-    public AIDestinationSetter destinationSetter;
-    public GameObject enemy;
-    public string enemyName;
+    private AIDestinationSetter destinationSetter;
+    private List<GameObject> enemy = new List<GameObject>();
+    public List<string> enemyName = new List<string>();
+
     private void Start() 
     {
-        if (string.IsNullOrEmpty(enemyName))
+
+        foreach(string name in enemyName)
         {
-            enemy = GameObject.Find("enemy");
-            destinationSetter = enemy.GetComponent<AIDestinationSetter>();
-            destinationSetter.target = null;
+            enemy.Add(GameObject.Find(name));
         }
-        else
+        
+        foreach(GameObject en in enemy)
         {
-            enemy = GameObject.Find(enemyName);
-            
-            if (enemy != null)
+            if (en != null)
             {
-                destinationSetter = enemy.GetComponent<AIDestinationSetter>();
+                destinationSetter = en.GetComponent<AIDestinationSetter>();
                 destinationSetter.target = null;
             }
             else

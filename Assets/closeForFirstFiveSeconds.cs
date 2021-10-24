@@ -32,14 +32,15 @@ public class closeForFirstFiveSeconds : MonoBehaviour
         {
             foreach(GameObject obj in objToClose)
             {
-                obj.gameObject.SetActive(true);
+                if(obj != null)
+                    obj.gameObject.SetActive(true);
             }
 
             GameObject.Find("player").GetComponent<movement>().lockMovement = false;
             GameObject.Find("player").GetComponent<movement>().lockMusicPlay = false;
             GameObject.Find("player").GetComponent<movement>().lockShooting = false;
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
