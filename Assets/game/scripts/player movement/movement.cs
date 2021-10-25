@@ -424,7 +424,7 @@ public class movement : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("collision with object without tag dettected, collision variable: " + collision);
+                Debug.Log("collision with object without known tag dettected, collision variable: " + collision);
                 break;
         }
     }
