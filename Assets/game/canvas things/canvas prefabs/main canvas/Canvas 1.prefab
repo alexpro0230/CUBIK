@@ -663,18 +663,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2020759749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391172449808150510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1310b49452781cb449e762b8592c9bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1579700072904339808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,6 +2326,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2020759749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391172449808150510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1310b49452781cb449e762b8592c9bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7225073441866001833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2350,7 @@ GameObject:
   - component: {fileID: 8605635600263140826}
   - component: {fileID: 4706789080867317147}
   - component: {fileID: 2334996950365511561}
+  - component: {fileID: 7326320063746499778}
   m_Layer: 5
   m_Name: Repeat Button
   m_TagString: Untagged
@@ -2470,6 +2471,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7326320063746499778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7225073441866001833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1310b49452781cb449e762b8592c9bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7736194851076117482
 GameObject:
   m_ObjectHideFlags: 0
@@ -3500,7 +3513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8167794210444780136, guid: 554d4979f405b594fb9fb31fc4b740a7, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: Canvas 1
       objectReference: {fileID: 0}
     - target: {fileID: 8167794210515799755, guid: 554d4979f405b594fb9fb31fc4b740a7, type: 3}
       propertyPath: m_IsActive

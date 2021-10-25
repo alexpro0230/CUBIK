@@ -46,7 +46,8 @@ public class bulletScript : MonoBehaviour
             if(collision.gameObject.tag == "enemy")
             {
                 float distanceBetweenPlayerAndEnemy = Vector3.Distance(GameObject.Find("player").transform.position, collision.gameObject.transform.position);
-                damage = findDamage(distanceBetweenPlayerAndEnemy, damageRandomization); 
+                float baseDamageAtPointInTime = damageOverDistance.Evaluate(distanceBetweenPlayerAndEnemy);
+                damage = Random.Range(baseDamageAtPointInTime - damageRandomization, baseDamageAtPointInTime + damageRandomization);
                 enemyScript enemyScript = collision.gameObject.GetComponent<enemyScript>();
                 enemyScript.health -= damage;
                 damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString("0.0"), 3);
@@ -57,16 +58,9 @@ public class bulletScript : MonoBehaviour
             }
         }
     }
-  
+
     void shakeCamera()
     {
         cinemachiShake.ShakeCamera(amplitudeGain, frequencyGain);
-    }
-
-    //new damage system
-    private float findDamage(flaot baseDamageAtPointInTime, float distanceBetweenPlayerAndEnemy)
-    {
-        float baseDamageAtPointInTime = damageOverDistance.Evaluate(distanceBetweenPlayerAndEnemy);
-        return Random.Range(baseDamageAtPointInTime - damageRandomization, baseDamageAtPointInTime + damageRandomization);
     }
 }
