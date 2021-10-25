@@ -116,6 +116,12 @@ public class movement : MonoBehaviour
 
     private void Start()
     {
+        startSettings();
+        initializeJetpack();
+    }
+
+    void startSettings()
+    {
         //I'm to lazy to reference a new variable, so i'm gonna use another bars parent to find the slow mo one
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().maxValue = slowMoTime;
         healthBar.gameObject.transform.parent.Find("jetpack counter bar").GetComponent<Slider>().maxValue = jetPackTime;
@@ -143,14 +149,6 @@ public class movement : MonoBehaviour
         }
         
         health = 100;
-        startSettings();
-        initializeJetpack();
-        
-
-    }
-
-    void startSettings()
-    {
         canShoot = true;
         
         ChromaticAberration cb;
