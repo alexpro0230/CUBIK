@@ -123,7 +123,7 @@ public class movement : MonoBehaviour
 
     void startSettings()
     {
-        healthbar.maxValue = maxHealth;
+        healthBar.maxValue = maxHealth;
 
         //I'm to lazy to reference a new variable, so i'm gonna use another bars parent to find the slow mo one
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().maxValue = slowMoTime;
