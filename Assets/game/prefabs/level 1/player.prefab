@@ -489,13 +489,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4951534630165149418}
   - component: {fileID: 4951534630165149417}
-  - component: {fileID: 4951534630165149416}
   - component: {fileID: 4951534630165149428}
   - component: {fileID: 4951534630165149419}
   - component: {fileID: 4951534630165149429}
   - component: {fileID: 3319685887514607557}
   - component: {fileID: 8899438406944655263}
   - component: {fileID: 8899438406944655268}
+  - component: {fileID: 4951534630165149416}
   m_Layer: 9
   m_Name: player
   m_TagString: player
@@ -574,50 +574,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4951534630165149416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4951534630165149423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f23581e5d22548448a2c05573aa1eeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 12
-  slowMoValue: 0.2
-  currentTimeScale: 0
-  slowMoTimeLeft: 0
-  slowMoTime: 5
-  slowMoRecoverDelay: 2
-  jumpForce: 12
-  hangTime: 0.1
-  JumpBufferLength: 0.07
-  checkObj: {fileID: 4951534631981622328}
-  groundCheckMask:
-    serializedVersion: 2
-    m_Bits: 4160
-  checkSphereRadius: 0.5
-  rb: {fileID: 4951534630165149428}
-  volume: {fileID: 0}
-  musicdef: {fileID: 4951534631272901329}
-  healthBar: {fileID: 0}
-  bullets: 120
-  canShoot: 0
-  gameMenuScript: {fileID: 0}
-  lavaScript: {fileID: 0}
-  health: 100
-  cursor: {fileID: 2800000, guid: d5ac253c1d4535b468f6329e6c621fb6, type: 3}
-  lavaCollEffect: {fileID: 2948129142550848369, guid: a475e8e75d135e342873390488a5dc86, type: 3}
-  storeGo: {fileID: 0}
-  pressFtext: {fileID: 0}
-  weaponManagerGo: {fileID: 0}
-  buttonHover: 0
-  isGrappling: 0
-  hasJetpack: 0
-  jetpackMultiplier: 300
 --- !u!50 &4951534630165149428
 Rigidbody2D:
   serializedVersion: 4
@@ -908,6 +864,56 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 38.128338
   m_MaxDistanceOnly: 0
+--- !u!114 &4951534630165149416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4951534630165149423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f23581e5d22548448a2c05573aa1eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockMovement: 0
+  lockShooting: 0
+  lockMusicPlay: 0
+  movementSpeed: 12
+  slowMoValue: 0.2
+  currentTimeScale: 0
+  slowMoTimeLeft: 0
+  slowMoTime: 5
+  slowMoRecoverDelay: 2
+  jumpForce: 12
+  hangTime: 0.1
+  JumpBufferLength: 0.07
+  checkObj: {fileID: 4951534631981622328}
+  groundCheckMask:
+    serializedVersion: 2
+    m_Bits: 4160
+  checkSphereRadius: 0.5
+  rb: {fileID: 4951534630165149428}
+  volume: {fileID: 0}
+  musicdef: {fileID: 4951534631272901329}
+  healthBar: {fileID: 0}
+  bullets: 120
+  canShoot: 0
+  gameMenuScript: {fileID: 0}
+  lavaScript: {fileID: 0}
+  health: 100
+  maxHealth: 0
+  cursor: {fileID: 2800000, guid: d5ac253c1d4535b468f6329e6c621fb6, type: 3}
+  lavaCollEffect: {fileID: 2948129142550848369, guid: a475e8e75d135e342873390488a5dc86, type: 3}
+  storeGo: {fileID: 0}
+  pressFtext: {fileID: 0}
+  weaponManagerGo: {fileID: 0}
+  buttonHover: 0
+  isGrappling: 0
+  hasJetpack: 0
+  jetpackMultiplier: 300
+  jetPackTime: 0
+  jetPackTimeLeft: 0
 --- !u!1 &4951534631272901335
 GameObject:
   m_ObjectHideFlags: 0

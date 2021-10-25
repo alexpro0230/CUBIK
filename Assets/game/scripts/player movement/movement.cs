@@ -21,7 +21,7 @@ public class movement : MonoBehaviour
     //Slow mo scale
     public float slowMoValue;
     [HideInInspector]public float currentTimeScale;
-    [HideInInspector] public float slowMoTimeLeft;
+    [HideInInspector]public float slowMoTimeLeft;
     
     //Amount of maximum time in slowmo mode
     public int slowMoTime;
@@ -39,12 +39,12 @@ public class movement : MonoBehaviour
 
     [Header("Jump system")]
     //Make a nice jumping system
-    [Range(0, 20)]public float jumpForce;
+    public float jumpForce;
     public float hangTime = .2f;
     public float JumpBufferLength = .1f;
     
-    private float JumpBufferCount;
-    private float hangCounter;
+    [HideInInspector]public float JumpBufferCount;
+    [HideInInspector]public float hangCounter;
 
     [Header("-//ground detection:")]
 
@@ -60,9 +60,9 @@ public class movement : MonoBehaviour
     private bool WasGouned;
 
     //Variable to know if player is currently landed
-    private bool grounded;
+    [HideInInspector]public bool grounded;
 
-    [Header("-//components:")]
+
     public Rigidbody2D rb;
     public Volume volume;
     public AudioSource musicdef;
@@ -73,12 +73,11 @@ public class movement : MonoBehaviour
     public int bullets; //Self exp
     public bool canShoot; //Self exp
 
-    [Header("-//scripts:")]
+    //Another sctipt for collison in lava
+    public lavaScript lavaScript;
     //Reference to menu management script
     public gameMenuScript gameMenuScript;
 
-    //Another sctipt for collison in lava
-    public lavaScript lavaScript;
 
     [Header("-//health system:")]
     public float health; //SelfExp
@@ -96,20 +95,19 @@ public class movement : MonoBehaviour
 
     [Header("Grappling Gun system")]
     //The joint that does the grappling hook simulation
-    private DistanceJoint2D joint;
+    public DistanceJoint2D joint;
     
     [HideInInspector] public bool isGrappling; //Self exp
 
     [Header("Jetpack system")]
     public bool hasJetpack; //Self exp
-    private bool jetPacking; //Currently flying in jetpack
+    public bool jetPacking; //Currently flying in jetpack
     public int jetpackMultiplier; //variable to control the force that is applied when jetpacking
     private GameObject jetpackGO; //Variable for the jetpack gameobject
-    //maxmum time that you can fly using jetpack
+    //maximum time that you can fly using jetpack
     public int jetPackTime;
-    [HideInInspector]
     //countdow for how much time there's left for jetpack
-    public float jetPackTimeLeft;
+    [HideInInspector]public float jetPackTimeLeft;
 
     #endregion
 
@@ -123,6 +121,7 @@ public class movement : MonoBehaviour
 
     void startSettings()
     {
+
         healthBar.maxValue = maxHealth;
 
         //I'm to lazy to reference a new variable, so i'm gonna use another bars parent to find the slow mo one
@@ -134,30 +133,29 @@ public class movement : MonoBehaviour
                
         weaponManagerGo = transform.Find("weapon manager").gameObject;
         
-        storeGo = GameObject.FindWithTag("store");
-        if(storeGo != null) storeGo.SetActive(false);
-        
-        health = maxHealth;
-        canShoot = true;
         
         ChromaticAberration cb;
         volume.profile.TryGet<ChromaticAberration>(out cb);
         cb.intensity.value = 0;
         
         musicdef.Play();
-        
+
+        health = maxHealth;
+        canShoot = true;
+
         grounded = true;
-        
+
         //Time settings
         Time.fixedDeltaTime = 0.0007f; //some hardcoded value that made it work so I didnt care about it anymore
         Time.timeScale = 1;  //Idk you're already supposed to start with this 
-        
+
         //Set how cursor looks
         setCursor();
 
         //if i want to change and get a jetpack by giving it to myself thorught the game then it would start full
         jetPackTimeLeft = jetPackTime;
     }
+
 
     void setCursor()
     {
@@ -189,7 +187,7 @@ public class movement : MonoBehaviour
         WasGouned = grounded;
         
         //Calulations for grappling gun
-        grapplingGunCalculation();
+        //grapplingGunCalculation();
     }
 
     private void FixedUpdate()
@@ -360,81 +358,28 @@ public class movement : MonoBehaviour
         grounded = Physics2D.OverlapCircle(checkObj.position, checkSphereRadius, groundCheckMask);
     }
 
-    IEnumerator bulletClamp()
-    {
-        bullets = Mathf.Clamp(bullets, 0, 15);
-        yield return null;
-    }
-
-    #endregion
-
-    #region trigger and collision shit
-    
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        findTriggerType(collision);
-    }
-    
-    void findTriggerType(Collider2D collision)
-    {
-        if(collision.gameObject.layer == 7)
-        {
-            LavaCollision();
-        }
-
-        switch (collision.gameObject.tag)
-        {
-            case "win trigger":
-                gameMenuScript.win();
-                break;
-
-            case "speed p-up":
-                speedPowerUp(collision);
-                break;
-
-            case "deleteOnEnter":
-                string num = collision.gameObject.name.Replace("trigger instruction ", "");
-                if (GameObject.Find("Instruction").GetComponent<floatingInstructionSystem>().currentInstruction < int.Parse(num))
-                    GameObject.Find("Instruction").GetComponent<floatingInstructionSystem>().SetInsturcion(int.Parse(num));
-                break;
-
-            case "TriggerEnemyAttack":
-                triggerEnemyAttackSingle triggerEnemyAttackSingle = collision.gameObject.GetComponent<triggerEnemyAttackSingle>();
-                triggerEnemyAttackSingle.startEnemyAttack();
-                break;
-
-            case "jetpack":
-                hasJetpack = true;
-                slowMoTimeLeft = slowMoTime;
-                Destroy(collision.gameObject);
-                break;
-
-            default:
-                Debug.Log("collision with object without known tag dettected, collision variable: " + collision);
-                break;
-        }
-    }
-    
-    public void LavaCollision()
-    {
-        health -= 40;
-        rb.AddForce(Vector2.up * 200000);
-        GameObject instantiatedObject = Instantiate(lavaCollEffect, new Vector3(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
-        StartCoroutine(deleteAfterTime(1f, instantiatedObject));
-    }
     #endregion
 
     #region other things
-    void speedPowerUp(Collider2D collision)
+
+    public void speedPowerUp(Collider2D collision)
     {
         StartCoroutine(increaseSpeed(5));
         Destroy(collision.gameObject);
     }
-    
-    void fadeText(Collider2D collision)
+
+    public void jumpPowerUp(GameObject powerUp)
     {
-        Animator anim = collision.gameObject.GetComponent<Animator>();
-        anim.SetBool("change", true);
+        StartCoroutine(increaseJumpForce(5));
+        Destroy(powerUp);
+    }
+
+    IEnumerator increaseJumpForce(float time)
+    {
+        jumpForce *= 2;
+        yield return new WaitForSeconds(time);
+        jumpForce /= 2;
+        StopCoroutine(increaseJumpForce(time));
     }
 
     IEnumerator increaseSpeed(float time)
@@ -482,7 +427,7 @@ public class movement : MonoBehaviour
             Time.timeScale = 1;
            
             //music effects
-            musicdef.pitch = 1;        
+            musicdef.pitch = 1;
 
             //slow mo counting
             canRecoverSlowMoDelay = true;
@@ -490,60 +435,11 @@ public class movement : MonoBehaviour
         }
     }
 
-    IEnumerator deleteAfterTime(float time, GameObject gameObject)
+    public IEnumerator deleteAfterTime(float time, GameObject gameObject)
     {
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
         StopCoroutine(deleteAfterTime(time, gameObject));
-    }
-
-    #endregion
-
-    #region grapplingGun
-    
-    void grapplingGunCalculation()
-    {
-        //if there was input for grappling gun acitvation and there's a wal close then attach to it
-        if(Input.GetKeyDown(KeyCode.Mouse1) && GameObject.Find("grappling hook pointer").GetComponent<SpriteRenderer>().enabled)
-        {
-            isGrappling = true;
-
-            joint = GetComponent<DistanceJoint2D>();
-            joint.connectedAnchor = GameObject.Find("grappling hook pointer").transform.position;
-
-            GetComponent<LineRenderer>().positionCount = 2;
-            GetComponent<LineRenderer>().SetPosition(0, transform.position);
-            GetComponent<LineRenderer>().SetPosition(1, GetComponent<DistanceJoint2D>().connectedAnchor);
-            GetComponent<LineRenderer>().enabled = true;
-
-            GetComponent<DistanceJoint2D>().enabled = true;
-        }
-
-        //stop grappling
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            isGrappling = false;
-
-            GetComponent<LineRenderer>().enabled = false;
-            GetComponent<DistanceJoint2D>().enabled = false;
-        }
-
-        if(jetPacking)
-        {
-            //if maximum angle is reached break rope
-            if (GetComponent<DistanceJoint2D>().connectedAnchor.y - transform.position.y <= 0.5f)
-            {
-                rb.AddForce(Vector2.down * 500, ForceMode2D.Force);
-
-                GetComponent<LineRenderer>().enabled = false;
-
-                GetComponent<DistanceJoint2D>().enabled = false;
-            }
-            
-            GetComponent<LineRenderer>().positionCount = 2;
-            GetComponent<LineRenderer>().SetPosition(0, transform.position);
-            GetComponent<LineRenderer>().SetPosition(1, GetComponent<DistanceJoint2D>().connectedAnchor);
-        }
     }
 
     #endregion
@@ -563,6 +459,7 @@ public class movement : MonoBehaviour
     //Creates jetpack at the begging of the game
     private void initializeJetpack()
     {
+        Debug.Log(GameObjHodler._i.jetpackVFX);
         jetpackGO = Instantiate(GameObjHodler._i.jetpackVFX, transform.position + new Vector3(0, -0.25f, 0), Quaternion.Euler(90, 0, 0), transform);
         jetpackGO.GetComponent<ParticleSystem>().Stop();
     }

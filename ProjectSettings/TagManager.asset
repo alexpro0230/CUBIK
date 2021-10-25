@@ -25,6 +25,7 @@ TagManager:
   - weaponManager
   - grappable
   - jetpack
+  - jump power up
   layers:
   - Default
   - TransparentFX
