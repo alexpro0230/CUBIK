@@ -501,33 +501,40 @@ public class movement : MonoBehaviour
     
     void grapplingGunCalculation()
     {
-
+        //if there was input for grappling gun acitvation and there's a wal close then attach to it
         if(Input.GetKeyDown(KeyCode.Mouse1) && GameObject.Find("grappling hook pointer").GetComponent<SpriteRenderer>().enabled)
         {
             isGrappling = true;
+
             joint = GetComponent<DistanceJoint2D>();
-            //joint.connectedAnchor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             joint.connectedAnchor = GameObject.Find("grappling hook pointer").transform.position;
+
             GetComponent<LineRenderer>().positionCount = 2;
             GetComponent<LineRenderer>().SetPosition(0, transform.position);
             GetComponent<LineRenderer>().SetPosition(1, GetComponent<DistanceJoint2D>().connectedAnchor);
             GetComponent<LineRenderer>().enabled = true;
+
             GetComponent<DistanceJoint2D>().enabled = true;
         }
 
+        //stop grappling
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             isGrappling = false;
+
             GetComponent<LineRenderer>().enabled = false;
             GetComponent<DistanceJoint2D>().enabled = false;
         }
 
-        if(GetComponent<LineRenderer>().enabled)
+        if(jetPacking)
         {
+            //if maximum angle is reached break rope
             if (GetComponent<DistanceJoint2D>().connectedAnchor.y - transform.position.y <= 0.5f)
             {
                 rb.AddForce(Vector2.down * 500, ForceMode2D.Force);
+
                 GetComponent<LineRenderer>().enabled = false;
+
                 GetComponent<DistanceJoint2D>().enabled = false;
             }
             
