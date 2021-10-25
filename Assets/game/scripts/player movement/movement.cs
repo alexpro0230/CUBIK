@@ -82,6 +82,7 @@ public class movement : MonoBehaviour
 
     [Header("-//health system:")]
     public float health; //SelfExp
+    public float maxHealth;
 
     [Header("-//other things:")]
     public Texture2D cursor; //The cursors texture
@@ -122,33 +123,21 @@ public class movement : MonoBehaviour
 
     void startSettings()
     {
+        healthbar.maxValue = maxHealth;
+
         //I'm to lazy to reference a new variable, so i'm gonna use another bars parent to find the slow mo one
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().maxValue = slowMoTime;
         healthBar.gameObject.transform.parent.Find("jetpack counter bar").GetComponent<Slider>().maxValue = jetPackTime;
         healthBar.gameObject.transform.parent.Find("jetpack counter bar").gameObject.SetActive(false);
 
         slowMoTimeLeft = slowMoTime;
-       
-        pressFtext = GameObject.FindWithTag("F to interact TEXT");
-        if(pressFtext != null) pressFtext.SetActive(false);
-        
+               
         weaponManagerGo = transform.Find("weapon manager").gameObject;
         
         storeGo = GameObject.FindWithTag("store");
         if(storeGo != null) storeGo.SetActive(false);
         
-        //Find out if store object exists
-        try
-        {
-            print("active in heirarchy: " + storeGo.activeInHierarchy);
-            print("active self: " + storeGo.activeSelf);
-        }
-        catch
-        {
-            print("Store GO probalby does not exist");
-        }
-        
-        health = 100;
+        health = maxHealth;
         canShoot = true;
         
         ChromaticAberration cb;
@@ -160,8 +149,8 @@ public class movement : MonoBehaviour
         grounded = true;
         
         //Time settings
-        Time.fixedDeltaTime = 0.0007f;
-        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.0007f; //some hardcoded value that made it work so I didnt care about it anymore
+        Time.timeScale = 1;  //Idk you're already supposed to start with this 
         
         //Set how cursor looks
         setCursor();
@@ -181,22 +170,18 @@ public class movement : MonoBehaviour
     
     void Update()
     {
-        //Refresh health bar value
-        refreshHealth();
-        
         //Check if landed
         groundCheck();
 
+        //some other scripts that use this variable instead of getting it themselves
         currentTimeScale = Time.timeScale;
         
         //Take all kind of input
         if(!lockMovement)
             takeInput();
-        
+
         //Die if health under 0
         checkHealth();
-
-        //if(InteractProcces) captureInteractProcess();
         
         //Other important calculations
         doUpdateThings();
@@ -246,7 +231,7 @@ public class movement : MonoBehaviour
             slowMo();
         }
         
-        //when all menus closed, it originated after some bugs, and it was the first hard scripted way that came to my mind
+        //when all menus closed, it originated after some bugs, and it was the first hard coded way that came to my mind
         if(gameMenuScript.menu.activeSelf == false && gameMenuScript.deathMenu.activeSelf == false && gameMenuScript.settingsMenu.activeSelf == false && gameMenuScript.winMenu.activeSelf == false && !buttonHover && !lockShooting)
         {
             weaponManagerGo.GetComponent<weapon_manager>().canSwitch = true;
@@ -283,19 +268,18 @@ public class movement : MonoBehaviour
             Destroy(instanciatied, 1f);
         }
         
+        //We chane the counters to the needed values
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
         healthBar.gameObject.transform.parent.Find("jetpack counter bar").GetComponent<Slider>().value = jetPackTimeLeft;
-
+        healthBar.value = health;
+        
+        //if we are jetpacking then do the needed calculations and apply the needed forces
         if (jetPacking)
             Jetpack();
         
+        //if not then stop the jetack trail
         if (!jetPacking) 
             jetpackGO.GetComponent<ParticleSystem>().Stop();
-    }
-
-    void refreshHealth()
-    {
-        healthBar.value = health;
     }
 
     void checkHealth()
@@ -467,26 +451,38 @@ public class movement : MonoBehaviour
         
         if (Time.timeScale == 1)
         {
+            //post processing effects
             volume.profile.TryGet<ChromaticAberration>(out cb);
-            cb.intensity.value = 1;
             volume.profile.TryGet<LensDistortion>(out ld);
+            cb.intensity.value = 1;
             ld.intensity.value = .15f;
+
+            //Time effects
             Time.timeScale = slowMoValue;
-            //Time.fixedDeltaTime = Time.timeScale * 0.02f;
-            musicdef.pitch = .75f;
+            
+            //slow mo counting
             slowMoRecoveredDelay = slowMoRecoverDelay;
             canRecoverSlowMoDelay = false;
             isInSlowMo = true;
+
+            //Music effects
+            musicdef.pitch = .75f;
         }
         else
         {
+            //post proccesing
             volume.profile.TryGet<LensDistortion>(out ld);
-            ld.intensity.value = 0f;
             volume.profile.TryGet<ChromaticAberration>(out cb);
+            ld.intensity.value = 0f;
             cb.intensity.value = 0;
+
+            //time effects
             Time.timeScale = 1;
-            //Time.fixedDeltaTime = fixedDeltaTimeAtStart / 5;
-            musicdef.pitch = 1;
+           
+            //music effects
+            musicdef.pitch = 1;        
+
+            //slow mo counting
             canRecoverSlowMoDelay = true;
             isInSlowMo = false;
         }
