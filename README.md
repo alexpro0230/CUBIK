@@ -18,7 +18,7 @@ You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
 # CUBIK
 - Cubik is a videogame that is being developed currently, this is it's GitHub repo.
 
-You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
+- You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
 
 # SOCIAL MEDIAS
 
