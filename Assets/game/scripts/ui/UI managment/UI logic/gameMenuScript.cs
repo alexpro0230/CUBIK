@@ -58,10 +58,6 @@ public class gameMenuScript : MonoBehaviour
             PlayerPrefs.SetFloat("music volume", -20); 
             PlayerPrefs.SetFloat("Gun SFX volume", -20);
         }
-        else
-        {
-
-        }
 
 #if UNITY_EDITOR
         PlayerPrefs.SetFloat("master volume", -10);
@@ -206,6 +202,9 @@ public class gameMenuScript : MonoBehaviour
 
     public void Quit()
     {
+        PlayerPrefs.SetFloat("master volume", masterVolume.value);
+        PlayerPrefs.SetFloat("music volume", musicVolume.value);
+        PlayerPrefs.SetFloat("Gun SFX volume", gunSfxVolume.value);
         Application.Quit(0);
     }
 

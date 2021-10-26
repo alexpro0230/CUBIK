@@ -35,6 +35,9 @@ public class collisionScript : MonoBehaviour
 
             case "deleteOnEnter":
                 string num = collision.gameObject.name.Replace("trigger instruction ", "");
+                if (GameObject.Find("Instruction") == null)
+                    break;   
+                
                 if (GameObject.Find("Instruction").GetComponent<floatingInstructionSystem>().currentInstruction < int.Parse(num))
                     GameObject.Find("Instruction").GetComponent<floatingInstructionSystem>().SetInsturcion(int.Parse(num));
                 break;

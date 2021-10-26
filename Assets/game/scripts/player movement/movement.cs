@@ -147,7 +147,7 @@ public class movement : MonoBehaviour
 
         //Time settings
         Time.fixedDeltaTime = 0.0007f; //some hardcoded value that made it work so I didnt care about it anymore
-        Time.timeScale = 1;  //Idk you're already supposed to start with this 
+        Time.timeScale = 1; //Idk you're already supposed to start with this 
 
         //Set how cursor looks
         setCursor();

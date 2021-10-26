@@ -53,8 +53,6 @@ public class grapplingGunScipt : MonoBehaviour
             //if maximum angle is reached break rope
             if (GetComponent<DistanceJoint2D>().connectedAnchor.y - transform.position.y <= 0.5f)
             {
-                movement.rb.AddForce(Vector2.down * 500, ForceMode2D.Force);
-
                 lr.enabled = false;
                 movement.joint.enabled = false;
             }

@@ -646,13 +646,16 @@ GameObject:
   m_Component:
   - component: {fileID: 7521645071913660922}
   - component: {fileID: 238098382904506375}
-  - component: {fileID: 238098382904506374}
   - component: {fileID: 238098382904506394}
   - component: {fileID: 238098382904506373}
   - component: {fileID: 238098382904506395}
   - component: {fileID: 812246000}
   - component: {fileID: 6225067947555168181}
   - component: {fileID: 6225067947555168142}
+  - component: {fileID: 238098382904506374}
+  - component: {fileID: 7657413819317187467}
+  - component: {fileID: 7657413819317187476}
+  - component: {fileID: 7657413819317187477}
   m_Layer: 9
   m_Name: player
   m_TagString: player
@@ -668,7 +671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5975962988398461644}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -31.89, y: 21.53, z: 0}
+  m_LocalPosition: {x: -32.04, y: 21.62, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 2725498489552677386}
@@ -731,55 +734,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &238098382904506374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5975962988398461644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f23581e5d22548448a2c05573aa1eeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockMovement: 0
-  lockShooting: 0
-  lockMusicPlay: 0
-  movementSpeed: 12
-  slowMoValue: 0.2
-  currentTimeScale: 0
-  slowMoTimeLeft: 0
-  slowMoTime: 5
-  slowMoRecoverDelay: 2
-  jumpForce: 20
-  hangTime: 0.1
-  JumpBufferLength: 0.07
-  checkObj: {fileID: 238098383109679830}
-  groundCheckMask:
-    serializedVersion: 2
-    m_Bits: 4160
-  checkSphereRadius: 0.5
-  rb: {fileID: 238098382904506394}
-  volume: {fileID: 0}
-  musicdef: {fileID: 238098383943181375}
-  healthBar: {fileID: 0}
-  bullets: 120
-  canShoot: 0
-  gameMenuScript: {fileID: 0}
-  lavaScript: {fileID: 0}
-  health: 100
-  cursor: {fileID: 2800000, guid: d5ac253c1d4535b468f6329e6c621fb6, type: 3}
-  lavaCollEffect: {fileID: 2948129142550848369, guid: a475e8e75d135e342873390488a5dc86, type: 3}
-  storeGo: {fileID: 0}
-  pressFtext: {fileID: 0}
-  weaponManagerGo: {fileID: 0}
-  buttonHover: 0
-  isGrappling: 0
-  hasJetpack: 0
-  jetpackMultiplier: 300
-  jetPackTime: 0
-  jetPackTimeLeft: 0
 --- !u!50 &238098382904506394
 Rigidbody2D:
   serializedVersion: 4
@@ -1070,6 +1024,97 @@ DistanceJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 38.128338
   m_MaxDistanceOnly: 0
+--- !u!114 &238098382904506374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975962988398461644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f23581e5d22548448a2c05573aa1eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockMovement: 0
+  lockShooting: 0
+  lockMusicPlay: 0
+  movementSpeed: 12
+  slowMoValue: 0.2
+  currentTimeScale: 0
+  slowMoTimeLeft: 0
+  slowMoTime: 5
+  slowMoRecoverDelay: 2
+  jumpForce: 12
+  hangTime: 0.1
+  JumpBufferLength: 0.07
+  JumpBufferCount: 0
+  hangCounter: 0
+  checkObj: {fileID: 238098383109679830}
+  groundCheckMask:
+    serializedVersion: 2
+    m_Bits: 4160
+  checkSphereRadius: 0.5
+  grounded: 0
+  rb: {fileID: 238098382904506394}
+  volume: {fileID: 0}
+  musicdef: {fileID: 238098383943181375}
+  healthBar: {fileID: 0}
+  bullets: 120
+  canShoot: 0
+  lavaScript: {fileID: 0}
+  gameMenuScript: {fileID: 0}
+  health: 100
+  maxHealth: 100
+  cursor: {fileID: 2800000, guid: d5ac253c1d4535b468f6329e6c621fb6, type: 3}
+  lavaCollEffect: {fileID: 2948129142550848369, guid: a475e8e75d135e342873390488a5dc86, type: 3}
+  storeGo: {fileID: 0}
+  pressFtext: {fileID: 0}
+  weaponManagerGo: {fileID: 0}
+  buttonHover: 0
+  joint: {fileID: 0}
+  isGrappling: 0
+  hasJetpack: 0
+  jetPacking: 0
+  jetpackMultiplier: 300
+  jetPackTime: 15
+  jetPackTimeLeft: 0
+--- !u!114 &7657413819317187467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975962988398461644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2be7effbf94e34c888f6d7897a41a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7657413819317187476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975962988398461644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61701195f940e9c4dbec3a5cfd8cd652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7657413819317187477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975962988398461644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71bab168574adf4bb61209c181ba423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7245734004235497784
 GameObject:
   m_ObjectHideFlags: 0
