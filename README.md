@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # CUBIK
 Cubik is a videogame that is being developed currently, this is it's GitHub repo.
 
@@ -14,12 +13,12 @@ You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
 
 # RELEASE DATE
 
-The release date is hard to predict, the game is in pretty early development, and lots of things to be added, but stay tunned to our social medias where we might announce the release date!
+ - The release date is hard to predict, the game is in pretty early development, and lots of things to be added, but stay tunned to our social medias where we might announce the release date!
 =======
 # CUBIK
-Cubik is a videogame that is being developed currently, this is it's GitHub repo.
+- Cubik is a videogame that is being developed currently, this is it's GitHub repo.
 
-You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
+- You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
 
 # SOCIAL MEDIAS
 
@@ -32,4 +31,3 @@ You can find the game [here](https://rubber-duck-studios.itch.io/cubik).
 # RELEASE DATE
 
 The release date is hard to predict, the game is in pretty early development, and lots of things to be added, but stay tunned to our social medias where we might announce the release date!
->>>>>>> 0dcffc31c9a5ba798527b8b7566dfb8deb429126
