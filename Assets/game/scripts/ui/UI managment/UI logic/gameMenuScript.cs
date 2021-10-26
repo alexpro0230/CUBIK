@@ -71,8 +71,6 @@ public class gameMenuScript : MonoBehaviour
 
         QualitySettings.vSyncCount = PlayerPrefs.GetInt("vsync");
 
-        Debug.Log(QualitySettings.vSyncCount);
-
         cursorOnGame = movementScript.cursor;
         settingsMenu.SetActive(false);
         chooseSkinMenu.SetActive(false);
@@ -126,7 +124,6 @@ public class gameMenuScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-
                 if (menu.activeInHierarchy == true)
                 {
                     resume();

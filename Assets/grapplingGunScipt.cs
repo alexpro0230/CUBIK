@@ -33,7 +33,10 @@ public class grapplingGunScipt : MonoBehaviour
             lr.SetPosition(1, GetComponent<DistanceJoint2D>().connectedAnchor);
             lr.enabled = true;
 
-            GetComponent<DistanceJoint2D>().enabled = true;
+            movement.joint.autoConfigureDistance = false;
+            movement.joint.distance = Vector2.Distance(transform.position, GameObject.Find("grappling hook pointer").transform.position);
+
+            movement.joint.enabled = true;
         }
 
         //stop grappling
@@ -50,7 +53,6 @@ public class grapplingGunScipt : MonoBehaviour
             //if maximum angle is reached break rope
             if (GetComponent<DistanceJoint2D>().connectedAnchor.y - transform.position.y <= 0.5f)
             {
-                Debug.Log("hahahahah");
                 movement.rb.AddForce(Vector2.down * 500, ForceMode2D.Force);
 
                 lr.enabled = false;
@@ -60,6 +62,9 @@ public class grapplingGunScipt : MonoBehaviour
             lr.positionCount = 2;
             lr.SetPosition(0, transform.position);
             lr.SetPosition(1, GetComponent<DistanceJoint2D>().connectedAnchor);
+            
+            if(movement.joint.distance > 2)
+                movement.joint.distance -= Time.deltaTime;
         }
     }
 }

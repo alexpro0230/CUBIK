@@ -256,7 +256,6 @@ public class movement : MonoBehaviour
 
         }
 
-
         //If player laned this frame
         if (!WasGouned && grounded)
         {
