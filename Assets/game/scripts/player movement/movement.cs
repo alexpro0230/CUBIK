@@ -14,10 +14,10 @@ public class movement : MonoBehaviour
     public bool lockShooting;
     public bool lockMusicPlay;
 
-    [Header("-//movement:")]
+    [Header("\n\nmovement:\n")]
     public float movementSpeed;
 
-    [Header("-//time manitpulation:")]
+    [Header("\n\ntime manitpulation:\n")]
     //Slow mo scale
     public float slowMoValue;
     [HideInInspector]public float currentTimeScale;
@@ -37,7 +37,7 @@ public class movement : MonoBehaviour
     
     private bool isInSlowMo; //Self explanatory
 
-    [Header("Jump system")]
+    [Header("\n\nJump system\n")]
     //Make a nice jumping system
     public float jumpForce;
     public float hangTime = .2f;
@@ -46,7 +46,7 @@ public class movement : MonoBehaviour
     [HideInInspector]public float JumpBufferCount;
     [HideInInspector]public float hangCounter;
 
-    [Header("-//ground detection:")]
+    [Header("\n\nground detection:\n")]
 
     //The check sphere transform
     public Transform checkObj;
@@ -60,16 +60,17 @@ public class movement : MonoBehaviour
     private bool WasGouned;
 
     //Variable to know if player is currently landed
-    [HideInInspector]public bool grounded;
+    public bool grounded;
 
-
+    
+    [Header("\n\nOther components")]
     public Rigidbody2D rb;
     public Volume volume;
     public AudioSource musicdef;
     public Slider healthBar;
 
 
-    [Header("shooting system")]
+    [Header("\n\nshooting system\n")]
     public int bullets; //Self exp
     public bool canShoot; //Self exp
 
@@ -79,11 +80,11 @@ public class movement : MonoBehaviour
     public gameMenuScript gameMenuScript;
 
 
-    [Header("-//health system:")]
+    [Header("\n\nhealth system:\n")]
     public float health; //SelfExp
     public float maxHealth;
 
-    [Header("-//other things:")]
+    [Header("\n\nother things:\n")]
     public Texture2D cursor; //The cursors texture
     public GameObject lavaCollEffect; //Effect for collision with lava
     public GameObject storeGo; //self exp
@@ -93,13 +94,13 @@ public class movement : MonoBehaviour
     //Varibble to stop you from shooting when hovering over pause button
     [HideInInspector] public bool buttonHover;
 
-    [Header("Grappling Gun system")]
+    [Header("\n\nGrappling Gun system\n")]
     //The joint that does the grappling hook simulation
     public DistanceJoint2D joint;
     
     [HideInInspector] public bool isGrappling; //Self exp
 
-    [Header("Jetpack system")]
+    [Header("\n\nJetpack system\n")]
     public bool hasJetpack; //Self exp
     public bool jetPacking; //Currently flying in jetpack
     public int jetpackMultiplier; //variable to control the force that is applied when jetpacking
@@ -121,6 +122,8 @@ public class movement : MonoBehaviour
 
     void startSettings()
     {
+
+        joint = GetComponent<DistanceJoint2D>();
 
         healthBar.maxValue = maxHealth;
 
@@ -239,7 +242,7 @@ public class movement : MonoBehaviour
             weaponManagerGo.transform.GetChild(weaponManagerGo.GetComponent<weapon_manager>().selectedWeapon).TryGetComponent<shootBullet>(out shootBullet);
             
             //Some weapons dont have shoot bullet script, like graenade, that's why we gotta check if it's not null
-            if(shootBullet != null)
+            if(shootBullet != null) 
                 shootBullet.canShoot = true;
         }
         else if(lockShooting)

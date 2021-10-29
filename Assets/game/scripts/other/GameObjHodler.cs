@@ -21,5 +21,11 @@ public class GameObjHodler : MonoBehaviour
     public GameObject landParticeEffect;
     public GameObject jetpackVFX;
     public GameObject damagePopUp;
+
+    [Header("\nRandom Room Generation System")]
+    public GameObject[] upRooms;
+    public GameObject[] downRooms;
+    public GameObject[] leftRooms;
+    public GameObject[] rightRooms;
 }
  
