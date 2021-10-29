@@ -239,7 +239,7 @@ public class movement : MonoBehaviour
             weaponManagerGo.transform.GetChild(weaponManagerGo.GetComponent<weapon_manager>().selectedWeapon).TryGetComponent<shootBullet>(out shootBullet);
             
             //Some weapons dont have shoot bullet script, like graenade, that's why we gotta check if it's not null
-            if(shootBullet != null)
+            if(shootBullet != null) 
                 shootBullet.canShoot = true;
         }
         else if(lockShooting)
