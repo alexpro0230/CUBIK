@@ -52,4 +52,6 @@ MonoBehaviour:
   - {fileID: 7249007199967698734, guid: 915db56ecabead242858159a06a4900f, type: 3}
   leftRooms:
   - {fileID: 4238996394293922243, guid: b0daaf9a80b47d84eaab05df6df57c72, type: 3}
-  rightRooms: []
+  - {fileID: 7072049669522448208, guid: adc5310d2dbf9324c8687893e66066b3, type: 3}
+  rightRooms:
+  - {fileID: 5946773730028645891, guid: 2299660ac4b7e5249bf87bc30d038bd3, type: 3}
