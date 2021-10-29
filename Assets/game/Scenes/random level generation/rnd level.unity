@@ -1131,7 +1131,6 @@ MonoBehaviour:
   timeToWait: 5
   objToClose:
   - {fileID: 181079598}
-  - {fileID: 958892120}
   - {fileID: 1092151934}
 --- !u!4 &652521367
 Transform:
@@ -1482,16 +1481,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1092151935}
     - target: {fileID: 6693479711211442374, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
+      propertyPath: m_Priority
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693479711211442374, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
       value: 1.3333334
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711211442374, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 10
+      value: 225.43
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711211442375, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6599987
+      value: -3.66002
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711211442375, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1499,7 +1502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711415626365, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: orthographic size
-      value: 10
+      value: 225.43
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711415626365, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -1507,7 +1510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711415626366, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6599987
+      value: -3.66002
       objectReference: {fileID: 0}
     - target: {fileID: 6693479711415626366, guid: 9f39eb10b6e8edd4ca2b44bd507a5840, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1750,11 +1753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &958892120 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1391172448177954927, guid: 031eefdbf88e4fc4fb74b0ff8f4a8152, type: 3}
-  m_PrefabInstance: {fileID: 958892117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1092151933
 PrefabInstance:
   m_ObjectHideFlags: 0

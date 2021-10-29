@@ -48,10 +48,21 @@ MonoBehaviour:
   damagePopUp: {fileID: 8324429426818088102, guid: 64f7f74e89e8efe4bba95498d29fc386, type: 3}
   upRooms:
   - {fileID: 3891316014803493091, guid: 186dd35c78afc36459337102c4831d4d, type: 3}
+  - {fileID: 2326346851033084704, guid: aeaf0629c1f16e2468742ba151e5f8ed, type: 3}
+  - {fileID: 3273326051431758555, guid: f10d6296953a77f409bf275868141bfb, type: 3}
+  - {fileID: 8063222636994582116, guid: 37f7d3ccf36b6144d9da9c4768fbdb7d, type: 3}
   downRooms:
   - {fileID: 7249007199967698734, guid: 915db56ecabead242858159a06a4900f, type: 3}
+  - {fileID: 5832962371239147793, guid: 8235e6124ec78de409ff6afdae1c4414, type: 3}
+  - {fileID: 780214264004525355, guid: 38bc4c60ea9f76d40907274c8d653f77, type: 3}
+  - {fileID: 4323994790406974944, guid: 7d1d138dd07615b4ea6e409e8fb4be63, type: 3}
   leftRooms:
   - {fileID: 4238996394293922243, guid: b0daaf9a80b47d84eaab05df6df57c72, type: 3}
   - {fileID: 7072049669522448208, guid: adc5310d2dbf9324c8687893e66066b3, type: 3}
+  - {fileID: 1383404021428348928, guid: e2d8f5c0bf4bcdf48bd400b51f9c5c42, type: 3}
+  - {fileID: 8156696801087322935, guid: 73640b5a05430b549a965f8b10d0aed0, type: 3}
   rightRooms:
   - {fileID: 5946773730028645891, guid: 2299660ac4b7e5249bf87bc30d038bd3, type: 3}
+  - {fileID: 6125170289885042571, guid: 98c9de84e10b2fc4aab4099125d9f59b, type: 3}
+  - {fileID: 1549485818779860818, guid: eabf72c8ca66a1044be3ff861d1ef420, type: 3}
+  - {fileID: 6781801959588486464, guid: 5a8ef9abc9904c542986204d3bcf85e9, type: 3}

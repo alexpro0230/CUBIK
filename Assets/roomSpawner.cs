@@ -36,7 +36,7 @@ public class roomSpawner : MonoBehaviour
             
             int arrayLength = GameObjHodler._i.rightRooms.Length;
 
-            int rand = Random.Range(0, arrayLength - 1);
+            int rand = Random.Range(0, arrayLength);
 
             Instantiate(GameObjHodler._i.rightRooms[rand], transform.position, Quaternion.identity);
         }
@@ -47,7 +47,7 @@ public class roomSpawner : MonoBehaviour
 
             int arrayLength = GameObjHodler._i.leftRooms.Length;
 
-            int rand = Random.Range(0, arrayLength - 1);
+            int rand = Random.Range(0, arrayLength);
 
             Instantiate(GameObjHodler._i.leftRooms[rand], transform.position, Quaternion.identity);
         }
