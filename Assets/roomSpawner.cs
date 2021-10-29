@@ -14,18 +14,34 @@ public class roomSpawner : MonoBehaviour
 
     public rooms exit;
 
-    private void Awake()
-    {
-        Debug.Log("on awake");
-    }
-
     private void Start()
     {
-        Debug.Log("start");
-    }
+        if(exit == rooms.down)
+        {
+            //insantiate room that has an exit on it's upper part 
+            //rooms up
 
-    private void OnEnable()
-    {
-        Debug.Log("on enable");
+            int arrayLength = GameObjHodler._i.upRooms.Length;
+
+            int rand = Random.Range(0, arrayLength - 1);
+
+
+            Instantiate(GameObjHodler._i.upRooms[rand], transform.position, Quaternion.identity);
+        }
+        else if(exit == rooms.left)
+        {
+            //instantiate room that has and exit on it's right part
+            //rooms right
+        }
+        else if(exit == rooms.right)
+        {
+            //instantiate room that has and exit on it's left part
+            //rooms left
+        }
+        else if(exit == rooms.top)
+        {
+            //instantiate room that has and exit on it's lower part
+            //Rooms down
+        }
     }
 }
