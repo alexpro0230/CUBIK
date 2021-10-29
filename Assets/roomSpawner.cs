@@ -14,6 +14,8 @@ public class roomSpawner : MonoBehaviour
 
     public rooms exit;
 
+    private GameObject room;
+
     private void Start()
     {
         if(exit == rooms.down)
@@ -25,7 +27,12 @@ public class roomSpawner : MonoBehaviour
 
             int rand = Random.Range(0, arrayLength - 1);
 
-            Instantiate(GameObjHodler._i.upRooms[rand], transform.position, Quaternion.identity);
+            room = Instantiate(GameObjHodler._i.upRooms[rand], transform.position, Quaternion.identity);
+
+            foreach (Transform child in room.transform.Find("walls"))
+            {
+                child.transform.tag = "ground";
+            }
         }
         else if(exit == rooms.left)
         {
@@ -42,7 +49,12 @@ public class roomSpawner : MonoBehaviour
 
             int rand = Random.Range(0, arrayLength - 1);
 
-            Instantiate(GameObjHodler._i.leftRooms[rand], transform.position, Quaternion.identity);
+            room = Instantiate(GameObjHodler._i.leftRooms[rand], transform.position, Quaternion.identity);
+
+            foreach (Transform child in room.transform.Find("walls"))
+            {
+                child.transform.tag = "ground";
+            }
         }
         else if(exit == rooms.top)
         {
@@ -53,7 +65,12 @@ public class roomSpawner : MonoBehaviour
 
             int rand = Random.Range(0, arrayLength - 1);
 
-            Instantiate(GameObjHodler._i.downRooms[rand], transform.position, Quaternion.identity);
+            room = Instantiate(GameObjHodler._i.downRooms[rand], transform.position, Quaternion.identity);
+            
+            foreach(Transform child in room.transform.Find("walls"))
+            {
+                child.transform.tag = "ground";
+            }
         }
     }
 }

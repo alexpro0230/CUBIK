@@ -60,9 +60,10 @@ public class movement : MonoBehaviour
     private bool WasGouned;
 
     //Variable to know if player is currently landed
-    [HideInInspector]public bool grounded;
+    public bool grounded;
 
-
+    
+    [Header("\n\nOther components")]
     public Rigidbody2D rb;
     public Volume volume;
     public AudioSource musicdef;
