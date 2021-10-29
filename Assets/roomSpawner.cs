@@ -25,23 +25,35 @@ public class roomSpawner : MonoBehaviour
 
             int rand = Random.Range(0, arrayLength - 1);
 
-
             Instantiate(GameObjHodler._i.upRooms[rand], transform.position, Quaternion.identity);
         }
         else if(exit == rooms.left)
         {
             //instantiate room that has and exit on it's right part
             //rooms right
+
         }
         else if(exit == rooms.right)
         {
             //instantiate room that has and exit on it's left part
             //rooms left
+
+            int arrayLength = GameObjHodler._i.leftRooms.Length;
+
+            int rand = Random.Range(0, arrayLength - 1);
+
+            Instantiate(GameObjHodler._i.leftRooms[rand], transform.position, Quaternion.identity);
         }
         else if(exit == rooms.top)
         {
             //instantiate room that has and exit on it's lower part
             //Rooms down
+
+            int arrayLength = GameObjHodler._i.downRooms.Length;
+
+            int rand = Random.Range(0, arrayLength - 1);
+
+            Instantiate(GameObjHodler._i.downRooms[rand], transform.position, Quaternion.identity);
         }
     }
 }

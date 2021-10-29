@@ -48,6 +48,8 @@ MonoBehaviour:
   damagePopUp: {fileID: 8324429426818088102, guid: 64f7f74e89e8efe4bba95498d29fc386, type: 3}
   upRooms:
   - {fileID: 3891316014803493091, guid: 186dd35c78afc36459337102c4831d4d, type: 3}
-  downRooms: []
-  leftRooms: []
+  downRooms:
+  - {fileID: 7249007199967698734, guid: 915db56ecabead242858159a06a4900f, type: 3}
+  leftRooms:
+  - {fileID: 4238996394293922243, guid: b0daaf9a80b47d84eaab05df6df57c72, type: 3}
   rightRooms: []
