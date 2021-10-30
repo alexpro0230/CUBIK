@@ -19,7 +19,7 @@ public class cameraStopOnLevelFinish : MonoBehaviour
 
     void Start()
     {
-        endLevelCamera = GameObject.Find("camera things").transform.Find("End Cam").gameObject;    
+        endLevelCamera = GameObject.Find("camera things").transform.Find("CM vcam1").gameObject;    
     }
 
     void Update()
@@ -28,11 +28,12 @@ public class cameraStopOnLevelFinish : MonoBehaviour
         {
             if(transform.position.x >= stopPosition.x)
             {
-                endLevelCamera.GetComponent<CinemachineVirtualCamera>().Priority = 20;
+                endLevelCamera.GetComponent<CinemachineVirtualCamera>().Follow = null;
+                
             }
             else
             {
-                endLevelCamera.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+                endLevelCamera.GetComponent<CinemachineVirtualCamera>().Follow = transform;
             }
         }
     }
