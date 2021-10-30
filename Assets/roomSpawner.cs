@@ -15,9 +15,11 @@ public class roomSpawner : MonoBehaviour
     public rooms exit;
 
     private GameObject room;
+    public Vector3 scale;
 
     private void Start()
     {
+        scale = new Vector3(1, 1, 1);
         if(exit == rooms.down)
         {
             //insantiate room that has an exit on it's upper part 
@@ -25,9 +27,9 @@ public class roomSpawner : MonoBehaviour
 
             int arrayLength = GameObjHodler._i.upRooms.Length;
 
-            int rand = Random.Range(0, arrayLength - 1);
+            int rand = Random.Range(0, arrayLength);
 
-            Instantiate(GameObjHodler._i.upRooms[rand], transform.position, Quaternion.identity);
+            Instantiate(GameObjHodler._i.upRooms[rand], transform.position, Quaternion.identity).transform.localScale = scale;
         }
         else if(exit == rooms.left)
         {
@@ -38,7 +40,7 @@ public class roomSpawner : MonoBehaviour
 
             int rand = Random.Range(0, arrayLength);
 
-            Instantiate(GameObjHodler._i.rightRooms[rand], transform.position, Quaternion.identity);
+            Instantiate(GameObjHodler._i.rightRooms[rand], transform.position, Quaternion.identity).transform.localScale = scale;
         }
         else if(exit == rooms.right)
         {
@@ -49,7 +51,7 @@ public class roomSpawner : MonoBehaviour
 
             int rand = Random.Range(0, arrayLength);
 
-            Instantiate(GameObjHodler._i.leftRooms[rand], transform.position, Quaternion.identity);
+            Instantiate(GameObjHodler._i.leftRooms[rand], transform.position, Quaternion.identity).transform.localScale = scale;
         }
         else if(exit == rooms.top)
         {
@@ -58,9 +60,9 @@ public class roomSpawner : MonoBehaviour
 
             int arrayLength = GameObjHodler._i.downRooms.Length;
 
-            int rand = Random.Range(0, arrayLength - 1);
+            int rand = Random.Range(0, arrayLength);
 
-            Instantiate(GameObjHodler._i.downRooms[rand], transform.position, Quaternion.identity);
+            Instantiate(GameObjHodler._i.downRooms[rand], transform.position, Quaternion.identity).transform.localScale = scale;
         }
     }
 }
