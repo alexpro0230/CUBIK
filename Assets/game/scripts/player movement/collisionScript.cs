@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class collisionScript : MonoBehaviour
 {
@@ -60,6 +61,11 @@ public class collisionScript : MonoBehaviour
             default:
                 Debug.Log("collision with object without known tag dettected, collision variable: " + collision);
                 break;
+        }
+
+        if(collision.gameObject.name == "next level")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 

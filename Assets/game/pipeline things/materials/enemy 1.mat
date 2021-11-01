@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: enemy
+  m_Name: enemy 1
   m_Shader: {fileID: -6465566751694194690, guid: 6c085daf59e094044b3561eb289490c1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -42,5 +42,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - Color_0dccf174ee60430c90ffc13759470445: {r: 137.02966, g: 0.64636785, b: 0.64636785, a: 0}
+    - Color_0dccf174ee60430c90ffc13759470445: {r: 0, g: 196.04263, b: 21.50699, a: 0}
   m_BuildTextureStacks: []
