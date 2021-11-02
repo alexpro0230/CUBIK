@@ -4,80 +4,53 @@ using UnityEngine;
 
 public class firstLevelScript : MonoBehaviour
 {
-    public List<GameObject> firstAttack = new List<GameObject>();
-    public List<GameObject> SecondtAttack = new List<GameObject>();
-    public List<GameObject> ThirdAttack = new List<GameObject>();
+    public List<List<GameObject>> attacks = new List<List<GameObject>>();
 
-    [SerializeField]
-    private bool finished1Attack;
-    [SerializeField]
-    private bool finished2Attack;
-    [SerializeField]
-    private bool finished3Attack;
-
-    private bool cavasOnPrevFrame; //on the beggining of the game we need to wait until splash screen turns off, this is a variable to check it
+    public bool[] finishedAttack;
 
     private void Start()
     {
-        foreach (GameObject obj in firstAttack)
-            obj.SetActive(false);
-
-        foreach (GameObject obj in SecondtAttack)
-            obj.SetActive(false);
-        
-        foreach (GameObject obj in ThirdAttack)
-            obj.SetActive(false);
+        foreach(List<GameObject> list in attacks)
+        {
+            foreach(GameObject obj in list)
+            {
+                obj.SetActive(false);
+                Debug.Log("deactivated " + obj);
+            }
+        }
     }
 
     private void Update()
     {
+        if(finishedAttack.Length != attacks.Length)
+        {
+            Debug.LogError("finished attack length is not equal to attacks length");
+        }
         try
         {
             if (GameObject.Find("Canvas").activeInHierarchy && cavasOnPrevFrame)
             {
-                foreach (GameObject obj in firstAttack)
+                foreach (GameObject obj in attacks[0])
                     obj.SetActive(true);
             }
         }
         catch
+        {}
+        int count = 0;
+        foreach(List<GameObject> list in attacks)
         {
-
-        }
-
-        foreach(GameObject go in firstAttack)
-        {
-            if (go.transform.Find("enemy gfx") != null)
+            foreach(GameObject obj in list)
             {
-                finished1Attack = false;
-                break;
+                if (go.transform.Find("enemy gfx") != null)
+                {
+                    finishedAttack[count] = false;
+                    break;
+                }
+                else
+                    finishedAttack[count] = true;        
             }
-            else
-                finished1Attack = true;
+            count++;
         }
-        
-        foreach(GameObject go in SecondtAttack)
-        {
-            if(go.transform.Find("enemy gfx") != null)
-            {
-                finished2Attack = false;
-                break;
-            }
-            else
-                finished2Attack = true;
-        }
-        
-        foreach(GameObject go in ThirdAttack)
-        {
-            if(go.transform.Find("enemy gfx") != null)
-            {
-                finished3Attack = false;
-                break;
-            }
-            else
-                finished3Attack = true;
-        }
-
-
         spawnIfNeeded();
         try
         {
@@ -92,24 +65,18 @@ public class firstLevelScript : MonoBehaviour
 
     private void spawnIfNeeded()
     {
-        //just finshed the first attack(start the second one)
-        if (finished1Attack && !finished2Attack && !finished3Attack)
+        for(int i = 0; i < finishedAttack.Length; i++)
         {
-            foreach (GameObject obj in SecondtAttack)
-                obj.SetActive(true);
-        }
-
-        //finshed 2nd attack(start 3rd)
-        if (finished1Attack && finished2Attack && !finished3Attack)
-        {
-            foreach (GameObject obj in ThirdAttack)
-                obj.SetActive(true);
-        }
-
-        //killed all enemies, open door
-        if (finished1Attack && finished2Attack && finished3Attack)
-        {
-            GameObject.Find("Door").GetComponent<doorScript>().openDoor = true;
-        }
+            if(finishedAttack[i])
+            {
+            }
+            else
+            {
+                foreach(GameObject obj in attacks[i])
+                {
+                    obj.SetActive(true);
+                }
+            }
+        }        
     }
 }
