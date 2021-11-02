@@ -7,10 +7,14 @@ public class explosiveEnemyScript : MonoBehaviour
     public int life;
     public int damage;
 
+    //explosion damage radius
     public float hitRadius;
 
+    //Dashing system
     private bool dashing;
-
+    private Vector3 dashDirection;
+    
+    
     private void Start()
     {
         dashing = false;
@@ -20,12 +24,17 @@ public class explosiveEnemyScript : MonoBehaviour
     {
         if(dashing)
         {
+            //dont remove, just comment if next doesnt work
             transform.position = Vector3.Lerp(transform.position, GameObject.Find("player").transform.position, Time.deltaTime);
+            
+            //use this, if works ofc
+            transform.position += dashDirection * Time.deltaTime * 5;    
         }
 
         if (Vector3.Distance(transform.parent.position, GameObject.Find("player").transform.position) < 3 && !dashing)
         {
             dashing = true;
+            dashDirection = GameObject.Find("player").transform.position - transform.position;
         }
     }
 
@@ -46,5 +55,7 @@ public class explosiveEnemyScript : MonoBehaviour
                 script.health -= damage;
             }
         }
+
+        Destroy(transform.parent.gameObject);
     }
 }
