@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class explosiveEnemyScript : MonoBehaviour
 {
-    public int life;
+    public float health;
     public int damage;
 
     //explosion damage radius
@@ -22,10 +22,13 @@ public class explosiveEnemyScript : MonoBehaviour
 
     private void Update()
     {
+        if (health <= 0)
+            Destroy(transform.parent.gameObject);
+
         if(dashing)
         {
             //dont remove, just comment if next doesnt work
-            transform.position = Vector3.Lerp(transform.position, GameObject.Find("player").transform.position, Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, GameObject.Find("player").transform.position, Time.deltaTime);
             
             //use this, if works ofc
             transform.position += dashDirection * Time.deltaTime * 5;    

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class firstLevelScript : MonoBehaviour
 {
-    public List<List<GameObject>> attacks = new List<List<GameObject>>();
+    [System.Serializable]
+    public class listItem
+        {
+            public List<GameObject> list = new List<GameObject>();
+        }
+        public List<listItem> attacks = new List<listItem>();
+
 
     public bool[] finishedAttack;
 
@@ -12,9 +18,9 @@ public class firstLevelScript : MonoBehaviour
 
     private void Start()
     {
-        foreach(List<GameObject> list in attacks)
+        foreach(listItem list in attacks)
         {
-            foreach(GameObject obj in list)
+            foreach(GameObject obj in list.list)
             {
                 obj.SetActive(false);
                 Debug.Log("deactivated " + obj);
@@ -32,16 +38,16 @@ public class firstLevelScript : MonoBehaviour
         {
             if (GameObject.Find("Canvas").activeInHierarchy && cavasOnPrevFrame)
             {
-                foreach (GameObject obj in attacks[0])
+                foreach (GameObject obj in attacks[0].list)
                     obj.SetActive(true);
             }
         }
         catch
         {}
         int count = 0;
-        foreach(List<GameObject> list in attacks)
+        foreach(listItem list in attacks)
         {
-            foreach(GameObject obj in list)
+            foreach(GameObject obj in list.list)
             {
                 if (obj.transform.Find("enemy gfx") != null)
                 {
@@ -49,7 +55,7 @@ public class firstLevelScript : MonoBehaviour
                     break;
                 }
                 else
-                    finishedAttack[count] = true;        
+                    finishedAttack[count] = true;
             }
             count++;
         }
@@ -74,7 +80,7 @@ public class firstLevelScript : MonoBehaviour
             }
             else
             {
-                foreach(GameObject obj in attacks[i])
+                foreach(GameObject obj in attacks[i].list)
                 {
                     obj.SetActive(true);
                 }
