@@ -58,6 +58,9 @@ public class bulletScript : MonoBehaviour
                 else
                 {
                     explosiveEnemyScript enemyScript = collision.gameObject.GetComponent<explosiveEnemyScript>();
+                    enemyScript.health -= damage;
+                    damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString("0.0"), 3);
+
                 }
             }
             else if(collision.gameObject.tag == "grenade")
