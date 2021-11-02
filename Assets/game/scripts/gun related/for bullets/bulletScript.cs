@@ -48,9 +48,19 @@ public class bulletScript : MonoBehaviour
                 float distanceBetweenPlayerAndEnemy = Vector3.Distance(GameObject.Find("player").transform.position, collision.gameObject.transform.position);
                 float baseDamageAtPointInTime = damageOverDistance.Evaluate(distanceBetweenPlayerAndEnemy);
                 damage = Random.Range(baseDamageAtPointInTime - damageRandomization, baseDamageAtPointInTime + damageRandomization);
-                enemyScript enemyScript = collision.gameObject.GetComponent<enemyScript>();
-                enemyScript.health -= damage;
-                damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString("0.0"), 3);
+                enemyScript EnemyScript = null; 
+                collision.gameObject.TryGetComponent<enemyScript>(out EnemyScript);
+                if (EnemyScript != null)
+                {
+                    EnemyScript.health -= damage;
+                    damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString("0.0"), 3);
+                }
+                else
+                {
+                    explosiveEnemyScript enemyScript = collision.gameObject.GetComponent<explosiveEnemyScript>();
+                    enemyScript.health -= damage;
+                    damagePopup.Create(collision.transform.position + new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f)), damage.ToString("0.0"), 3);
+                }
             }
             else if(collision.gameObject.tag == "grenade")
             {
