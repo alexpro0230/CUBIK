@@ -49,13 +49,17 @@ public class firstLevelScript : MonoBehaviour
         {
             foreach(GameObject obj in list.list)
             {
-                if (obj.transform.Find("enemy gfx") != null)
+                try
                 {
-                    finishedAttack[count] = false;
-                    break;
+                    if (obj.transform.Find("enemy gfx") != null)
+                    {
+                        finishedAttack[count] = false;
+                        break;
+                    }
+                    else
+                        finishedAttack[count] = true;
                 }
-                else
-                    finishedAttack[count] = true;
+                catch { }
             }
             count++;
         }
@@ -77,12 +81,14 @@ public class firstLevelScript : MonoBehaviour
         {
             if(finishedAttack[i])
             {
+                continue;
             }
             else
             {
                 foreach(GameObject obj in attacks[i].list)
                 {
                     obj.SetActive(true);
+                    return;
                 }
             }
         }        
