@@ -34,24 +34,29 @@ public class firstLevelScript : MonoBehaviour
         {
             Debug.LogError("finished attack length is not equal to attacks length");
         }
+        
         try
         {
             if (GameObject.Find("Canvas").activeInHierarchy && cavasOnPrevFrame)
             {
                 foreach (GameObject obj in attacks[0].list)
+                {
+                    Debug.Log(obj);
                     obj.SetActive(true);
+                }
             }
         }
-        catch
-        {}
+        catch{}
+        
         int count = 0;
+        
         foreach(listItem list in attacks)
         {
             foreach(GameObject obj in list.list)
             {
                 try
                 {
-                    if (obj.transform.Find("enemy gfx") != null)
+                    if (obj != null)
                     {
                         finishedAttack[count] = false;
                         break;
@@ -63,7 +68,9 @@ public class firstLevelScript : MonoBehaviour
             }
             count++;
         }
+
         spawnIfNeeded();
+        
         try
         {
             if (GameObject.Find("Canvas").activeInHierarchy)
@@ -85,7 +92,10 @@ public class firstLevelScript : MonoBehaviour
             }
             else
             {
-                foreach(GameObject obj in attacks[i].list)
+                if (i == finishedAttack.Length - 1)
+                    return;
+
+                foreach(GameObject obj in attacks[i + 1].list)
                 {
                     obj.SetActive(true);
                     return;

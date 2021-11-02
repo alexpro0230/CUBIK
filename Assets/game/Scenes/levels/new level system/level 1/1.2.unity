@@ -113832,6 +113832,7 @@ GameObject:
   - component: {fileID: 8944630939011434562}
   - component: {fileID: 8944630939011434565}
   - component: {fileID: 8944630939011434561}
+  - component: {fileID: 8944630939011434564}
   m_Layer: 12
   m_Name: enemy gfx
   m_TagString: enemy
@@ -113920,6 +113921,27 @@ Transform:
   m_Father: {fileID: 8944630939492258494}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &8944630939011434564
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944630939011434560}
+  m_BodyType: 0
+  m_Simulated: 0
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!61 &8944630939011434565
 BoxCollider2D:
   m_ObjectHideFlags: 0

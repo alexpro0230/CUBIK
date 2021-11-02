@@ -27,7 +27,6 @@ public class explosiveEnemyScript : MonoBehaviour
 
         if(dashing)
         {
-            Debug.Log("is dashing");
             //dont remove, just comment if next doesnt work
             //transform.position = Vector3.Lerp(transform.position, GameObject.Find("player").transform.position, Time.deltaTime);
             
@@ -35,7 +34,7 @@ public class explosiveEnemyScript : MonoBehaviour
             transform.position += dashDirection * Time.deltaTime * 5;    
         }
 
-        if (Vector3.Distance(transform.parent.position, GameObject.Find("player").transform.position) <= 3 && !dashing)
+        if (Vector3.Distance(transform.parent.position, GameObject.Find("player").transform.position) <= 6 && !dashing)
         {
             dashing = true;
             dashDirection = GameObject.Find("player").transform.position - transform.position;
