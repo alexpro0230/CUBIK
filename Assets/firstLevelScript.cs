@@ -8,6 +8,8 @@ public class firstLevelScript : MonoBehaviour
 
     public bool[] finishedAttack;
 
+    private bool cavasOnPrevFrame;
+
     private void Start()
     {
         foreach(List<GameObject> list in attacks)
@@ -22,7 +24,7 @@ public class firstLevelScript : MonoBehaviour
 
     private void Update()
     {
-        if(finishedAttack.Length != attacks.Length)
+        if(finishedAttack.Length != attacks.Count)
         {
             Debug.LogError("finished attack length is not equal to attacks length");
         }
@@ -41,7 +43,7 @@ public class firstLevelScript : MonoBehaviour
         {
             foreach(GameObject obj in list)
             {
-                if (go.transform.Find("enemy gfx") != null)
+                if (obj.transform.Find("enemy gfx") != null)
                 {
                     finishedAttack[count] = false;
                     break;
