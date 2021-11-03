@@ -69,8 +69,11 @@ public class firstLevelScript : MonoBehaviour
             count++;
         }
 
-        spawnIfNeeded();
-        
+        if(!cavasOnPrevFrame)
+        {
+            spawnIfNeeded();
+        }
+
         try
         {
             if (GameObject.Find("Canvas").activeInHierarchy)
@@ -86,21 +89,24 @@ public class firstLevelScript : MonoBehaviour
     {
         for(int i = 0; i < finishedAttack.Length; i++)
         {
-            if(finishedAttack[i])
+            if (finishedAttack[i]) 
             {
-                continue;
+            
             }
             else
             {
                 if (i == finishedAttack.Length - 1)
                     return;
 
-                foreach(GameObject obj in attacks[i + 1].list)
+                foreach (GameObject obj in attacks[i + 1].list)
                 {
+                    Debug.Log((i + 1) + " i: " + i);
+                    Debug.Log(obj);
                     obj.SetActive(true);
-                    return;
                 }
+
+                return;
             }
-        }        
+        }
     }
 }
