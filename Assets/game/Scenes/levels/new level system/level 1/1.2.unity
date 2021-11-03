@@ -2298,7 +2298,6 @@ MonoBehaviour:
   - list:
     - {fileID: 378623327}
     - {fileID: 1165414290}
-    - {fileID: 8944630939492258495}
   - list:
     - {fileID: 1569046832}
     - {fileID: 1249883317}
@@ -2309,7 +2308,7 @@ MonoBehaviour:
     - {fileID: 177064877}
     - {fileID: 1298546681}
     - {fileID: 1151248049}
-  finishedAttack: 000000
+  currentAttack: 0
 --- !u!4 &1104628484
 Transform:
   m_ObjectHideFlags: 0
@@ -114079,4 +114078,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
