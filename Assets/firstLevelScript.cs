@@ -76,7 +76,8 @@ public class firstLevelScript : MonoBehaviour
         
         currentAttack = Mathf.Clamp(currentAttack, 0, attacks.Count - 1);
         
-        spawnIfNeeded();
+        if(GameObject.Find("Canvas") != null)
+            spawnIfNeeded();
 
         try
         {
@@ -93,6 +94,7 @@ public class firstLevelScript : MonoBehaviour
     {
         foreach(GameObject obj in attacks[currentAttack].list)
         {
+            Debug.Log("spawning... spawned " + currentAttack);
             if(obj != null)
                 obj.SetActive(true);
         }
