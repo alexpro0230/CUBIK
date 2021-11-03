@@ -45,7 +45,6 @@ public class firstLevelScript : MonoBehaviour
         catch { }
 
         #endregion
-
         
         //dont do the following calculation if canvas is not on
         if(GameObject.Find("Canvas") == null)
@@ -53,8 +52,6 @@ public class firstLevelScript : MonoBehaviour
             currentAttack = 0;
             goto skip;
         }
-
-        //if all gameobjects in the current index list are null add one to count
 
         int count = currentAttack;
 
