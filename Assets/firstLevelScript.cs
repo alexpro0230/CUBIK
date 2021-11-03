@@ -1,18 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class firstLevelScript : MonoBehaviour
 {
     [System.Serializable]
-    public class listItem
+        public class listItem
         {
             public List<GameObject> list = new List<GameObject>();
         }
         public List<listItem> attacks = new List<listItem>();
 
 
-    public bool[] finishedAttack;
+    public int currentAttack;
 
     private bool cavasOnPrevFrame;
 
@@ -30,11 +29,8 @@ public class firstLevelScript : MonoBehaviour
 
     private void Update()
     {
-        if(finishedAttack.Length != attacks.Count)
-        {
-            Debug.LogError("finished attack length is not equal to attacks length");
-        }
-        
+
+        #region spawn first time
         try
         {
             if (GameObject.Find("Canvas").activeInHierarchy && cavasOnPrevFrame)
@@ -47,32 +43,40 @@ public class firstLevelScript : MonoBehaviour
             }
         }
         catch{}
+
+        #endregion
+
         
-        int count = 0;
-        
-        foreach(listItem list in attacks)
+        //dont do the following calculation if canvas is not on
+        if(GameObject.Find("Canvas") == null)
         {
-            foreach(GameObject obj in list.list)
-            {
-                try
-                {
-                    if (obj != null)
-                    {
-                        finishedAttack[count] = false;
-                        break;
-                    }
-                    else
-                        finishedAttack[count] = true;
-                }
-                catch { }
-            }
-            count++;
+            currentAttack = 0;
+            goto skip;
         }
 
-        if(!cavasOnPrevFrame)
+        //if all gameobjects in the current index list are null add one to count
+
+        int count = currentAttack;
+
+        foreach(GameObject obj in attacks[currentAttack].list)
         {
-            spawnIfNeeded();
+            if(obj == null)
+            {
+                currentAttack = count + 1;
+            }
+            else
+            {
+                currentAttack = count;
+                break;
+            }
         }
+
+    //for goto statement
+    skip:
+        
+        currentAttack = Mathf.Clamp(currentAttack, 0, attacks.Count - 1);
+        
+        spawnIfNeeded();
 
         try
         {
@@ -87,26 +91,10 @@ public class firstLevelScript : MonoBehaviour
 
     private void spawnIfNeeded()
     {
-        for(int i = 0; i < finishedAttack.Length; i++)
+        foreach(GameObject obj in attacks[currentAttack].list)
         {
-            if (finishedAttack[i]) 
-            {
-            
-            }
-            else
-            {
-                if (i == finishedAttack.Length - 1)
-                    return;
-
-                foreach (GameObject obj in attacks[i + 1].list)
-                {
-                    Debug.Log((i + 1) + " i: " + i);
-                    Debug.Log(obj);
-                    obj.SetActive(true);
-                }
-
-                return;
-            }
+            if(obj != null)
+                obj.SetActive(true);
         }
     }
 }
