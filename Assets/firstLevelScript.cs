@@ -42,7 +42,7 @@ public class firstLevelScript : MonoBehaviour
                 }
             }
         }
-        catch{}
+        catch { }
 
         #endregion
 
