@@ -94,7 +94,6 @@ public class firstLevelScript : MonoBehaviour
     {
         foreach(GameObject obj in attacks[currentAttack].list)
         {
-            Debug.Log("spawning... spawned " + currentAttack);
             if(obj != null)
                 obj.SetActive(true);
         }
