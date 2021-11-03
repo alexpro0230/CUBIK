@@ -9,15 +9,18 @@ public class explosiveEnemyScript : MonoBehaviour
 
     //explosion damage radius
     public float hitRadius;
+    
+    //the distance needed for the enemy to come flying towards the player
+    public float attackRadius;
 
     //Dashing system
-    private bool dashing;
+    private bool isDashing;
     private Vector3 dashDirection;
-    
+    public float dashForce;
     
     private void Start()
     {
-        dashing = false;
+        isDashing = false;
     }
 
     private void Update()
@@ -25,18 +28,14 @@ public class explosiveEnemyScript : MonoBehaviour
         if (health <= 0)
             Destroy(transform.parent.gameObject);
 
-        if(dashing)
+        if(isDashing)
         {
-            //dont remove, just comment if next doesnt work
-            //transform.position = Vector3.Lerp(transform.position, GameObject.Find("player").transform.position, Time.deltaTime);
-            
-            //use this, if works ofc
-            transform.position += dashDirection * Time.deltaTime * 5;    
+            transform.position += dashDirection * Time.deltaTime * dashForce;
         }
 
-        if (Vector3.Distance(transform.parent.position, GameObject.Find("player").transform.position) <= 6 && !dashing)
+        if (Vector3.Distance(transform.parent.position, GameObject.Find("player").transform.position) <= attackRadius && !isDashing)
         {
-            dashing = true;
+            isDashing = true;
             dashDirection = GameObject.Find("player").transform.position - transform.position;
         }
     }
