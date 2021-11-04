@@ -49,9 +49,14 @@ public class explosiveEnemyScript : MonoBehaviour
         explode(coll);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Collider2D[] coll = Physics2D.OverlapCircleAll(transform.position, hitRadius);
+        explode(coll);
+    }
+
     private void explode(Collider2D[] coll)
     {
-
         foreach (Collider2D col in coll)
         {
             if (col.gameObject.name == "player")
@@ -65,6 +70,12 @@ public class explosiveEnemyScript : MonoBehaviour
                 if (_script != null) _script.health -= damage;
             }
         }
+
+        GameObject graphics = Instantiate(GameObjHodler._i.EnemyExplosionEffectGraphics, transform.position, Quaternion.identity);
+        GameObject audio = Instantiate(GameObjHodler._i.EnemyExplosionEffectAudio, transform.position, Quaternion.identity);
+
+        Destroy(graphics, 5);
+        Destroy(audio, 5);
 
         Destroy(transform.parent.gameObject);
     }

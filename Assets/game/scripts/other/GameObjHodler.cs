@@ -21,6 +21,8 @@ public class GameObjHodler : MonoBehaviour
     public GameObject landParticeEffect;
     public GameObject jetpackVFX;
     public GameObject damagePopUp;
+    public GameObject EnemyExplosionEffectGraphics;
+    public GameObject EnemyExplosionEffectAudio;
 
     [Header("\nRandom Room Generation System")]
     public GameObject[] upRooms;

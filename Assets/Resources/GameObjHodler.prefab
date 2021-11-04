@@ -46,6 +46,8 @@ MonoBehaviour:
   landParticeEffect: {fileID: 2037748481469301755, guid: b7f8abc8d278f4d40b3e3484d72f729c, type: 3}
   jetpackVFX: {fileID: 1299822377367627528, guid: 37277607f37595e44bdf631d760a485e, type: 3}
   damagePopUp: {fileID: 8324429426818088102, guid: 64f7f74e89e8efe4bba95498d29fc386, type: 3}
+  EnemyExplosionEffectGraphics: {fileID: 4186377369763458751, guid: c2288dda12ab96e41ba873ac51869dc9, type: 3}
+  EnemyExplosionEffectAudio: {fileID: 1420181674894427823, guid: c379a923c05cd724eb053b70cc8306a9, type: 3}
   upRooms:
   - {fileID: 3891316014803493091, guid: 186dd35c78afc36459337102c4831d4d, type: 3}
   - {fileID: 2326346851033084704, guid: aeaf0629c1f16e2468742ba151e5f8ed, type: 3}
