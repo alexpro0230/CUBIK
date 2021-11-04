@@ -26,7 +26,10 @@ public class explosiveEnemyScript : MonoBehaviour
     private void Update()
     {
         if (health <= 0)
-            Destroy(transform.parent.gameObject);
+        {
+            Collider2D[] coll = Physics2D.OverlapCircleAll(transform.position, hitRadius);
+            explode(coll);
+        }
 
         if(isDashing)
         {
@@ -43,6 +46,11 @@ public class explosiveEnemyScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Collider2D[] coll = Physics2D.OverlapCircleAll(transform.position, hitRadius);
+        explode(coll);
+    }
+
+    private void explode(Collider2D[] coll)
+    {
 
         foreach (Collider2D col in coll)
         {
@@ -54,7 +62,7 @@ public class explosiveEnemyScript : MonoBehaviour
             {
                 enemyScript _script = null;
                 col.TryGetComponent<enemyScript>(out _script);
-                _script.health -= damage;
+                if (_script != null) _script.health -= damage;
             }
         }
 
