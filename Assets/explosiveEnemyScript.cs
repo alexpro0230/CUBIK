@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class explosiveEnemyScript : MonoBehaviour
@@ -65,9 +63,10 @@ public class explosiveEnemyScript : MonoBehaviour
             }
             else if (col.gameObject.tag == "enemy")
             {
-                enemyScript _script = null;
-                col.TryGetComponent<enemyScript>(out _script);
-                if (_script != null) _script.health -= damage;
+                enemyScript script = null;
+                //no scpecifiying the type of component because it's defined in the script variable, lmao I just learned you can to that
+                col.TryGetComponent(out script);
+                if (script != null) script.health -= damage;
             }
         }
 
