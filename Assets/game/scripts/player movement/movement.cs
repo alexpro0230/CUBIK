@@ -22,41 +22,24 @@ public class movement : MonoBehaviour
     [HideInInspector]public float currentTimeScale; //Used for other scripts 
     [HideInInspector]public float slowMoTimeLeft; //if in slowm mo, we know how much time more we can use it
     public int slowMoTime; //the maximum of time we can be in slowmo mode
-    //Delay between slowmo finshes and the slow mo timer starts to slowly recover
-    public float slowMoRecoverDelay;
-    
-    //Counter to check how much of the delay has already past
-    private float slowMoRecoveredDelay;
-    
-    //Boolean to check if we can start recovering the slowmo delay
-    private bool canRecoverSlowMoDelay;
-    
+    public float slowMoRecoverDelay;//Delay between slowmo finshes and the slow mo timer starts to slowly recover
+    private float slowMoRecoveredDelay; //Counter to check how much of the delay has already past
+    private bool canRecoverSlowMoDelay; //Boolean to check if we can start recovering the slowmo delay
     private bool isInSlowMo; //Self explanatory
 
     [Header("\n\nJump system\n")]
-    //Make a nice jumping system
-    public float jumpForce;
+    public float jumpForce; //Make a nice jumping system
     public float hangTime = .2f;
-    public float JumpBufferLength = .1f;
-    
+    public float JumpBufferLength = .1f;    
     [HideInInspector]public float JumpBufferCount;
     [HideInInspector]public float hangCounter;
 
     [Header("\n\nground detection:\n")]
-
-    //The check sphere transform
-    public Transform checkObj;
-
-    //What is ground and whats not
-    public LayerMask groundCheckMask; 
-    
+    public Transform checkObj; //The check sphere transform
+    public LayerMask groundCheckMask; //What is ground and whats not
     public float checkSphereRadius; //Self exp
-    
-    //This is a varible to check if player was grounded the previous frame, and in this way know the exact moment when landed
-    private bool WasGouned;
-
-    //Variable to know if player is currently landed
-    public bool grounded;
+    private bool WasGouned; //This is a varible to check if player was grounded the previous frame, and in this way know the exact moment when landed
+    public bool grounded; //Variable to know if player is currently landed
 
     
     [Header("\n\nOther components")]
@@ -68,13 +51,12 @@ public class movement : MonoBehaviour
     [Header("\n\nshooting system\n")]
     public int bullets; //(amount)
     public bool canShoot; //Self exp
-
     public lavaScript lavaScript; //Another sctipt for collison in lava
     public gameMenuScript gameMenuScript; //Reference to menu management script
     
     [Header("\n\nhealth system:\n")]
-    public float health; //SelfExp
-    public float maxHealth;
+    public float health; //current health
+    public float maxHealth; //the health you spawn with
 
     [Header("\n\nother things:\n")]
     public Texture2D cursor; //The cursors texture
