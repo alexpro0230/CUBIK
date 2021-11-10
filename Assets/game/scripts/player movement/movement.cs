@@ -18,14 +18,10 @@ public class movement : MonoBehaviour
     public float movementSpeed;
 
     [Header("\n\ntime manitpulation:\n")]
-    //Slow mo scale
-    public float slowMoValue;
-    [HideInInspector]public float currentTimeScale;
-    [HideInInspector]public float slowMoTimeLeft;
-    
-    //Amount of maximum time in slowmo mode
-    public int slowMoTime;
-    
+    public float slowMoValue; //Slow mo scale
+    [HideInInspector]public float currentTimeScale; //Used for other scripts 
+    [HideInInspector]public float slowMoTimeLeft; //if in slowm mo, we know how much time more we can use it
+    public int slowMoTime; //the maximum of time we can be in slowmo mode
     //Delay between slowmo finshes and the slow mo timer starts to slowly recover
     public float slowMoRecoverDelay;
     
@@ -64,22 +60,18 @@ public class movement : MonoBehaviour
 
     
     [Header("\n\nOther components")]
-    public Rigidbody2D rb;
-    public Volume volume;
-    public AudioSource musicdef;
-    public Slider healthBar;
-
+    public Rigidbody2D rb; //players rigidbody
+    public Volume volume; //the current volume
+    public AudioSource musicdef; //no fucking idea
+    public Slider healthBar; //to modify it's value according to health
 
     [Header("\n\nshooting system\n")]
-    public int bullets; //Self exp
+    public int bullets; //(amount)
     public bool canShoot; //Self exp
 
-    //Another sctipt for collison in lava
-    public lavaScript lavaScript;
-    //Reference to menu management script
-    public gameMenuScript gameMenuScript;
-
-
+    public lavaScript lavaScript; //Another sctipt for collison in lava
+    public gameMenuScript gameMenuScript; //Reference to menu management script
+    
     [Header("\n\nhealth system:\n")]
     public float health; //SelfExp
     public float maxHealth;
@@ -87,17 +79,13 @@ public class movement : MonoBehaviour
     [Header("\n\nother things:\n")]
     public Texture2D cursor; //The cursors texture
     public GameObject lavaCollEffect; //Effect for collision with lava
-    public GameObject storeGo; //self exp
-    public GameObject pressFtext; //"
-    public GameObject weaponManagerGo; //"
-    
-    //Varibble to stop you from shooting when hovering over pause button
-    [HideInInspector] public bool buttonHover;
+    public GameObject storeGo; //self explanatory
+    public GameObject pressFtext; //the go with press f to interact
+    public GameObject weaponManagerGo; //honestly idk why I have a separate reference to it but im lazy to change
+    [HideInInspector] public bool buttonHover; //Varibble to stop you from shooting when hovering over pause button
 
     [Header("\n\nGrappling Gun system\n")]
-    //The joint that does the grappling hook simulation
-    public DistanceJoint2D joint;
-    
+    public DistanceJoint2D joint; //The joint that does the grappling hook simulation
     [HideInInspector] public bool isGrappling; //Self exp
 
     [Header("\n\nJetpack system\n")]
@@ -105,10 +93,8 @@ public class movement : MonoBehaviour
     public bool jetPacking; //Currently flying in jetpack
     public int jetpackMultiplier; //variable to control the force that is applied when jetpacking
     private GameObject jetpackGO; //Variable for the jetpack gameobject
-    //maximum time that you can fly using jetpack
-    public int jetPackTime;
-    //countdow for how much time there's left for jetpack
-    [HideInInspector]public float jetPackTimeLeft;
+    public int jetPackTime; //maximum time that you can fly using jetpack
+    [HideInInspector]public float jetPackTimeLeft; //countdow for how much time there's left for jetpack
 
     #endregion
 
@@ -122,7 +108,6 @@ public class movement : MonoBehaviour
 
     void startSettings()
     {
-
         joint = GetComponent<DistanceJoint2D>();
 
         healthBar.maxValue = maxHealth;
