@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class explosiveEnemyScript : MonoBehaviour
+public class explosiveEnemyScript : MonoBehaviour, IDamage
 {
-    public float health;
     public int damage;
 
     //explosion damage radius
@@ -15,15 +14,19 @@ public class explosiveEnemyScript : MonoBehaviour
     private bool isDashing;
     private Vector3 dashDirection;
     public float dashForce;
-    
+
+    public float health;
+    public float Health { get; set; }
+
     private void Start()
     {
+        Health = health;
         isDashing = false;
     }
 
     private void Update()
     {
-        if (health <= 0)
+        if (Health <= 0)
         {
             Collider2D[] coll = Physics2D.OverlapCircleAll(transform.position, hitRadius);
             explode(coll);
@@ -57,18 +60,12 @@ public class explosiveEnemyScript : MonoBehaviour
     {
         foreach (Collider2D col in coll)
         {
-            if (col.gameObject.name == "player")
-            {
-                col.GetComponent<movement>().health -= damage;
-            }
-            else if (col.gameObject.tag == "enemy")
-            {
-                enemyScript script = null;
-                //no scpecifiying the type of component because it's defined in the script variable, lmao I just learned you can to that
-                col.TryGetComponent(out script);
-                if (script != null) script.health -= damage;
-            }
+            IDamage _Interface = null;
+            col.TryGetComponent(out _Interface);
+            if (_Interface != null)
+                _Interface.Health -= damage;
         }
+
 
         GameObject graphics = Instantiate(GameObjHodler._i.EnemyExplosionEffectGraphics, transform.position, Quaternion.identity);
         GameObject audio = Instantiate(GameObjHodler._i.EnemyExplosionEffectAudio, transform.position, Quaternion.identity);

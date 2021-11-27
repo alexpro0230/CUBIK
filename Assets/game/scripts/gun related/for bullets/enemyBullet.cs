@@ -44,10 +44,9 @@ public class enemyBullet : MonoBehaviour
             //CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, 1);
             Destroy(bulletEffectExplosion, 2);
 
-            if(collision.gameObject.transform.tag == "player")
-            {
-                movementScript.health -= damage;
-            }
+            IDamage _interface = null;
+            playerGameObject.TryGetComponent(out _interface);
+            _interface.Health -= damage;
         }
     }
   

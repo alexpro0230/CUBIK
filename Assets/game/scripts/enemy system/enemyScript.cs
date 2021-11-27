@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyScript : MonoBehaviour
+public class enemyScript : MonoBehaviour, IDamage
 {
-    public float health;
     public int damage;
+
+    public float health;
+
+    public float Health { get ; set ; }
 
     void Start()
     {
-        
+        Health = health;
     }    
     
     void Update()
     {
-        if(health <= 0) Destroy(transform.parent.gameObject);
+        if(Health <= 0) Destroy(transform.parent.gameObject);
     }
 }

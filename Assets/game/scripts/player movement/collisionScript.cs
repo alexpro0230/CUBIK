@@ -71,7 +71,7 @@ public class collisionScript : MonoBehaviour
 
     private void LavaCollision()
     {
-        movement.health -= 40;
+        movement.Health -= 40;
         movement.rb.AddForce(Vector2.up * 200000);
         GameObject instantiatedObject = Instantiate(movement.lavaCollEffect, new Vector3(transform.position.x, transform.position.y - 0.5f), Quaternion.identity);
         StartCoroutine(movement.deleteAfterTime(1f, instantiatedObject));

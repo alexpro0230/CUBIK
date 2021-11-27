@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class movement : MonoBehaviour
+public class movement : MonoBehaviour, IDamage
 {
     #region variables
 
@@ -55,8 +55,8 @@ public class movement : MonoBehaviour
     public gameMenuScript gameMenuScript; //Reference to menu management script
     
     [Header("\n\nhealth system:\n")]
-    public float health; //current health
     public float maxHealth; //the health you spawn with
+    public float Health { get; set; }
 
     [Header("\n\nother things:\n")]
     public Texture2D cursor; //The cursors texture
@@ -110,7 +110,7 @@ public class movement : MonoBehaviour
         
         musicdef.Play();
 
-        health = maxHealth;
+        Health = maxHealth;
         canShoot = true;
 
         grounded = true;
@@ -238,7 +238,7 @@ public class movement : MonoBehaviour
         //We chane the counters to the needed values
         healthBar.gameObject.transform.parent.Find("slowmo counter bar").GetComponent<Slider>().value = slowMoTimeLeft;
         healthBar.gameObject.transform.parent.Find("jetpack counter bar").GetComponent<Slider>().value = jetPackTimeLeft;
-        healthBar.value = health;
+        healthBar.value = Health;
         
         //if we are jetpacking then do the needed calculations and apply the needed forces
         if (jetPacking)
@@ -251,7 +251,7 @@ public class movement : MonoBehaviour
 
     void checkHealth()
     {
-        if(health <= 0)
+        if(Health <= 0)
         {
             gameMenuScript.death();
         }

@@ -51,7 +51,7 @@ public class grenadeInstanceScript : MonoBehaviour
             colliders[i].TryGetComponent<movement>(out movement);
             if(movement != null)
             {
-                movement.health -= damage;
+                movement.Health -= damage;
             }
         }
 
@@ -59,7 +59,7 @@ public class grenadeInstanceScript : MonoBehaviour
         {
             if(enemyScript[i] != null)
             {
-                enemyScript[i].health -= damage;
+                enemyScript[i].Health -= damage;
             }
         }
 
